@@ -1,7 +1,8 @@
 import type { TPost } from '@/types/posts';
 
-export interface PostsState {
+export interface TPostsState {
     posts: TPost[];
+    visitedPost: TPost | null;
     loading: boolean;
     error: string | null;
     currentPage: number;

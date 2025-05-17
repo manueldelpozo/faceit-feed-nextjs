@@ -3,6 +3,8 @@ import PostAuthor from '@/components/Post/PostAuthor';
 import PostBody from '@/components/Post/PostBody';
 import PostTitle from '@/components/Post/PostTitle';
 import { POST_BODY_MAX_LENGTH } from '@/consts/text';
+import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
+import { visitPost } from '@/redux/slices/postsSlice';
 import type { TPost } from '@/types/posts';
 
 interface IProps {
@@ -10,10 +12,19 @@ interface IProps {
 }
 
 const PostItem = ({ post }: IProps) => {
+    const dispatch = useAppDispatch();
     const highlightClass = post.isNew ? 'bg-green-900' : '';
 
+    const handleClick = () => {
+        dispatch(visitPost(post));
+    }
+
     return (
-        <Link href={`/posts/${post.id}`} passHref>
+        <Link
+            href={`/posts/${post.id}`}
+            passHref
+            onClick={handleClick}
+        >
             <div className={`border rounded-lg p-4 m-4 hover:bg-amber-900 cursor-pointer transition-colors duration-500 ${highlightClass}`}>
                 <PostAuthor
                     name={post.author?.name}

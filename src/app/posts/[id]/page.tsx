@@ -11,7 +11,7 @@ import Loader from '@/components/UI/Loader/Loader';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { useAppSelector } from '@/redux/hooks/useAppSelector';
-import { selectPostById, selectLoading } from '@/redux/selectors/posts';
+import { selectPostById, selectLoading, selectVisitedPost } from '@/redux/selectors/posts';
 import { fetchPostById } from '@/redux/thunks/posts';
 import { ALERT_VARIANTS } from '@/types/alert';
 
@@ -20,9 +20,11 @@ const SinglePostPage = () => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation();
 
-    const post = useAppSelector(selectPostById(params.id));
+    const postById = useAppSelector(selectPostById(params.id));
+    const visitedPost = useAppSelector(selectVisitedPost);
     const loading = useAppSelector(selectLoading);
 
+    const post = postById || visitedPost;
     const isFetching = loading && !post;
     const hasError = !loading && !post;
 

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { PRAVATAR_BASE_URL, DUMMYJSON_POSTS_URL } from '@/consts/apiRoutes';
 import { en } from '@/locales/en';
 import type { TPost } from '@/types/posts';
-import type { PostsState } from '../types/posts';
+import type { TPostsState } from '../types/posts';
 
 interface PostsResponse {
     posts: TPost[];
@@ -12,7 +12,7 @@ interface PostsResponse {
 export const fetchPosts = createAsyncThunk<
     PostsResponse,
     number,
-    { state: { posts: PostsState } }
+    { state: { posts: TPostsState } }
 >(
     'posts/fetchPosts',
     async (page: number, { getState }) => {

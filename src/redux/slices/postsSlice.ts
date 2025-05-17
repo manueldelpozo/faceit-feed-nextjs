@@ -2,10 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { en } from '@/locales/en';
 import type { TPost } from '@/types/posts';
 import { fetchPostById, fetchPosts } from '../thunks/posts';
-import type { PostsState } from '../types/posts';
+import type { TPostsState } from '../types/posts';
 
-const initialState: PostsState = {
+const initialState: TPostsState = {
     posts: [],
+    visitedPost: null,
     loading: false,
     error: null,
     currentPage: 0,
@@ -27,8 +28,8 @@ const postsSlice = createSlice({
                 post.isNew = false;
             }
         },
-        resetPosts: () => {
-            return initialState;
+        visitPost: (state, action: PayloadAction<TPostsState['visitedPost']>) => {
+            state.visitedPost = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -36,6 +37,7 @@ const postsSlice = createSlice({
             .addCase(fetchPosts.pending, (state) => {
                 state.loading = true;
                 state.error = null;
+                state.visitedPost = null;
             })
             .addCase(fetchPosts.fulfilled, (state, action) => {
                 state.loading = false;
@@ -53,12 +55,7 @@ const postsSlice = createSlice({
             })
             .addCase(fetchPostById.fulfilled, (state, action: PayloadAction<TPost>) => {
                 state.loading = false;
-                const existingPostIndex = state.posts.findIndex((post) => post.id === action.payload.id);
-                if (existingPostIndex >= 0) {
-                    state.posts[existingPostIndex] = action.payload;
-                } else {
-                    state.posts.push(action.payload);
-                }
+                state.visitedPost = action.payload;
             })
             .addCase(fetchPostById.rejected, (state, action) => {
                 state.loading = false;
@@ -67,6 +64,6 @@ const postsSlice = createSlice({
     },
 });
 
-export const { addNewPost, markPostAsSeen, resetPosts } = postsSlice.actions;
+export const { addNewPost, markPostAsSeen, visitPost } = postsSlice.actions;
 
 export default postsSlice.reducer;

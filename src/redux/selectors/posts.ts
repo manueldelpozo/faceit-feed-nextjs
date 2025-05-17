@@ -33,6 +33,11 @@ export const selectPostById = (id: string) => createSelector(
     (posts) => posts.find(post => post.id === parseInt(id))
 );
 
+export const selectVisitedPost = createSelector(
+    selectPostsState,
+    (postsState) => postsState.visitedPost
+);
+
 export const selectPostsPerPage = createSelector(
     selectPostsState,
     (postsState) => postsState.postsPerPage
