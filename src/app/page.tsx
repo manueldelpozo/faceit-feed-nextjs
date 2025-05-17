@@ -17,6 +17,7 @@ import {
   selectCurrentPage,
   selectHasMore,
 } from '@/redux/selectors/posts';
+import { resetPosts } from '@/redux/slices/postsSlice';
 import { fetchPosts } from '@/redux/thunks/posts';
 import { ALERT_VARIANTS } from '@/types/alert';
 
@@ -29,13 +30,14 @@ const FeedPage = () => {
   const currentPage = useSelector(selectCurrentPage);
   const hasMore = useSelector(selectHasMore);
 
-  const shouldLoadFirst = posts.length === 0 && !error;
+  const shouldLoadFirst = posts.length <= 1 && !error;
   const shouldLoadMore = !loading && hasMore;
 
   const [shouldNotifyNewPost] = useNewPostSimulate();
 
   useEffect(() => {
     if (shouldLoadFirst) {
+      dispatch(resetPosts());
       dispatch(fetchPosts(0));
     }
   }, [dispatch, shouldLoadFirst]);
