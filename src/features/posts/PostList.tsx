@@ -5,6 +5,7 @@ import useInfiniteScrolling from '@/hooks/useInfiniteScrolling';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/types/alert';
 import type { TPost } from '@/types/posts';
+import PostItem from './PostItem';
 
 interface IProps {
     posts: TPost[];
@@ -31,7 +32,12 @@ const PostList = ({
     if (posts.length === 0 && !loading) {
         return (
             <div className="text-center my-4">
-                <p className="text-gray-500">{t('feed.noPosts')}</p>
+                <Alert
+                    variant={ALERT_VARIANTS.WARNING}
+                    message={t('feed.noPosts')}
+                    isFloating={false}
+                    duration={0}
+                />
             </div>
         );
     }
@@ -39,7 +45,7 @@ const PostList = ({
     return (
         <div className="space-y-4">
             {posts.map((post) => (
-                <div key={post.id}>{post.title}</div>
+                <PostItem key={post.id} post={post} />
             ))}
 
             <div ref={loaderRef} className="flex justify-center my-4">
@@ -54,7 +60,6 @@ const PostList = ({
                     <Alert
                         message={t('feed.endOfFeed')}
                         variant={ALERT_VARIANTS.INFO}
-                        duration={0}
                         position={ALERT_POSITIONS.BOTTOM_CENTER}
                     />
                 )}

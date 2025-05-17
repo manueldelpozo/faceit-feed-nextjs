@@ -26,7 +26,7 @@ export const fetchPosts = createAsyncThunk<
             author: {
                 id: post.userId,
                 name: `Author ${post.userId}`,
-                image: `https://i.pravatar.cc/150?img=${post.userId}`,
+                image: `https://i.pravatar.cc/${post.userId}`,
             },
         }));
 

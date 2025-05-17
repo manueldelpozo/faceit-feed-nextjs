@@ -5,12 +5,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import PageTitle from '@/components/Page/PageTitle';
 import Alert from '@/components/UI/Alert/Alert';
 import PostList from '@/features/posts/PostList';
+import { getMockedNewPost } from '@/helpers/getMockedNewPost';
 import useInterval from '@/hooks/useInterval';
 import { useTranslation } from '@/hooks/useTranslation';
-import { newPostMock } from '@/mocks/newPostWithAuthor';
 import {
-  selectPostsWithAuthors,
+  selectPosts,
   selectLoading,
+  // selectPostsWithAuthors,
   selectError,
   selectCurrentPage,
   selectHasMore,
@@ -23,7 +24,7 @@ import { ALERT_VARIANTS } from '@/types/alert';
 const FeedPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
-  const posts = useSelector(selectPostsWithAuthors);
+  const posts = useSelector(selectPosts);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const currentPage = useSelector(selectCurrentPage);
@@ -49,6 +50,8 @@ const FeedPage = () => {
   }, [loading, hasMore, currentPage, dispatch]);
 
   const simulateNewPost = useCallback(() => {
+    const newPostMock = getMockedNewPost();
+
     dispatch(addNewPost(newPostMock));
   }, [dispatch]);
 

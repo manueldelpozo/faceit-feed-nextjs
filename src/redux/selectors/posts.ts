@@ -2,10 +2,8 @@ import { createSelector } from '@reduxjs/toolkit';
 import type { TPost } from '@/types/posts';
 import { RootState } from '../store';
 
-// Base selectors
 export const selectPostsState = (state: RootState) => state.posts;
 
-// Derived selectors
 export const selectPosts = createSelector(
     selectPostsState,
     (postsState) => postsState.posts
@@ -65,7 +63,7 @@ export const selectPostsWithAuthors = createSelector(
         author: post.author || {
             id: post.userId,
             name: `Author ${post.userId}`,
-            image: `https://i.pravatar.cc/150?img=${post.userId}`,
+            image: `https://i.pravatar.cc/${post.userId}`,
         },
     }))
 ); 
