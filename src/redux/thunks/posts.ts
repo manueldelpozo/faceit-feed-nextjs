@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Post } from '@/types/posts';
+import type { TPost } from '@/types/posts';
 import type { PostsState } from '../types/posts';
 
 interface PostsResponse {
-    posts: Post[];
+    posts: TPost[];
     total: number;
 }
 
@@ -21,7 +21,7 @@ export const fetchPosts = createAsyncThunk<
         const postsResponse = await fetch(`https://dummyjson.com/posts?limit=${limit}&skip=${skip}`);
         const postsData = await postsResponse.json();
 
-        const postsWithAuthors = postsData.posts.map((post: Post) => ({
+        const postsWithAuthors = postsData.posts.map((post: TPost) => ({
             ...post,
             author: {
                 id: post.userId,

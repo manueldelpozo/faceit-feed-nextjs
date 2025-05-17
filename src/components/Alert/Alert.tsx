@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ALERT_VARIANTS, ALERT_POSITIONS, type AlertVariant, type AlertPosition } from '@/types/alert';
-import { variantStyles, positionStyles } from '../../consts//alertStyles';
+import { ALERT_VARIANTS, ALERT_POSITIONS, type TAlertVariant, type TAlertPosition } from '@/types/alert';
+import { variantStyles, positionStyles } from '../../consts/alertStyles';
 import { variantIcons } from '../../consts/icons';
 
 interface IProps {
     message: string;
-    variant?: AlertVariant;
+    variant?: TAlertVariant;
     duration?: number;
     onClose?: () => void;
     isFloating?: boolean;
-    position?: AlertPosition;
+    position?: TAlertPosition;
 }
 
 const Alert = ({

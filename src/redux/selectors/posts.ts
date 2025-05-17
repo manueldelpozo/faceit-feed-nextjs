@@ -1,6 +1,6 @@
-import { RootState } from '../store';
 import { createSelector } from '@reduxjs/toolkit';
-import type { Post } from '@/types/posts';
+import type { TPost } from '@/types/posts';
+import { RootState } from '../store';
 
 // Base selectors
 export const selectPostsState = (state: RootState) => state.posts;
@@ -39,28 +39,28 @@ export const selectPostsPerPage = createSelector(
 // Complex selectors
 export const selectNewPosts = createSelector(
     selectPosts,
-    (posts) => posts.filter((post: Post) => post.isNew)
+    (posts) => posts.filter((post: TPost) => post.isNew)
 );
 
 export const selectSeenPosts = createSelector(
     selectPosts,
-    (posts) => posts.filter((post: Post) => !post.isNew)
+    (posts) => posts.filter((post: TPost) => !post.isNew)
 );
 
 export const selectPostsByAuthor = (authorId: number) => createSelector(
     selectPosts,
-    (posts) => posts.filter((post: Post) => post.author?.id === authorId)
+    (posts) => posts.filter((post: TPost) => post.author?.id === authorId)
 );
 
 export const selectPostsByTag = (tag: string) => createSelector(
     selectPosts,
-    (posts) => posts.filter((post: Post) => post.tags.includes(tag))
+    (posts) => posts.filter((post: TPost) => post.tags.includes(tag))
 );
 
 // Memoized selectors for performance
 export const selectPostsWithAuthors = createSelector(
     selectPosts,
-    (posts) => posts.map((post: Post) => ({
+    (posts) => posts.map((post: TPost) => ({
         ...post,
         author: post.author || {
             id: post.userId,

@@ -1,6 +1,6 @@
-import type { Post } from '@/types/posts';
+import type { TPost } from '@/types/posts';
 
-export const newPostMock: Post = {
+export const newPostMock: TPost = {
     id: Date.now(),
     title: `New Post Title ${Date.now()}`,
     body: `This is a new post arriving in real-time at ${new Date().toLocaleTimeString()}. ` +

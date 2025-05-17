@@ -1,4 +1,4 @@
-export interface Post {
+export interface TPost {
     id: number;
     title: string;
     body: string;

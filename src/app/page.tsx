@@ -2,23 +2,24 @@
 
 import { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import type { AppDispatch } from './redux/store';
-import { addNewPost, markPostAsSeen } from './redux/slices/postsSlice';
-import { fetchPosts } from './redux/thunks/posts';
+import { ALERT_VARIANTS } from '@/types/alert';
+import Alert from '../components/Alert/Alert';
+import PageTitle from '../components/Page/PageTitle';
+import PostList from '../components/Post/PostList';
+import useInterval from '../hooks/useInterval';
+import { useTranslation } from '../hooks/useTranslation';
+import { newPostMock } from '../mocks/newPostWithAuthor';
 import {
   selectPostsWithAuthors,
   selectLoading,
   selectError,
   selectCurrentPage,
   selectHasMore,
-} from './redux/selectors/posts';
-import PostList from './components/Post/PostList';
-import Alert from './components/Alert/Alert';
-import PageTitle from './components/Page/PageTitle';
-import useInterval from './hooks/useInterval';
-import { useTranslation } from './hooks/useTranslation';
-import { newPostMock } from './mocks/newPostWithAuthor';
-import { ALERT_VARIANTS } from '@/types/alert';
+} from '../redux/selectors/posts';
+import { addNewPost, markPostAsSeen } from '../redux/slices/postsSlice';
+import { fetchPosts } from '../redux/thunks/posts';
+import type { AppDispatch } from '../redux/store';
+
 
 const FeedPage = () => {
   const { t } = useTranslation();

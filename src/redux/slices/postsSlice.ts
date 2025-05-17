@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { TPost } from '@/types/posts';
 import { fetchPosts } from '../thunks/posts';
-import type { Post } from '@/types/posts';
 import type { PostsState } from '../types/posts';
 
 const initialState: PostsState = {
@@ -16,7 +16,7 @@ const postsSlice = createSlice({
     name: 'posts',
     initialState,
     reducers: {
-        addNewPost: (state, action: PayloadAction<Post>) => {
+        addNewPost: (state, action: PayloadAction<TPost>) => {
             state.posts.unshift({ ...action.payload, isNew: true });
         },
         markPostAsSeen: (state, action: PayloadAction<number>) => {

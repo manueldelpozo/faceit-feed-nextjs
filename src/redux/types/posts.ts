@@ -1,7 +1,7 @@
-import type { Post } from '@/types/posts';
+import type { TPost } from '@/types/posts';
 
 export interface PostsState {
-    posts: Post[];
+    posts: TPost[];
     loading: boolean;
     error: string | null;
     currentPage: number;

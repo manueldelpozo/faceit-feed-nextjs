@@ -1,14 +1,13 @@
 import { useRef } from 'react';
-import { useTranslation } from '@/app/hooks/useTranslation';
-import useInfiniteScrolling from '@/app/hooks/useInfiniteScrolling';
-import { Post } from '@/types/posts';
-// import { PostItem } from './PostItem';
-import Loader from '../Loader/Loader';
-import Alert from '../Alert/Alert';
+import useInfiniteScrolling from '@/hooks/useInfiniteScrolling';
+import { useTranslation } from '@/hooks/useTranslation';
 import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/types/alert';
+import type { TPost } from '@/types/posts';
+import Alert from '../Alert/Alert';
+import Loader from '../Loader/Loader';
 
 interface IProps {
-    posts: Post[];
+    posts: TPost[];
     loading?: boolean;
     hasMore?: boolean;
     onLoadMore?: () => void;

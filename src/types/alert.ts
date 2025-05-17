@@ -5,7 +5,7 @@ export const ALERT_VARIANTS = {
     INFO: 'info',
 } as const;
 
-export type AlertVariant = typeof ALERT_VARIANTS[keyof typeof ALERT_VARIANTS];
+export type TAlertVariant = typeof ALERT_VARIANTS[keyof typeof ALERT_VARIANTS];
 
 export const ALERT_POSITIONS = {
     TOP_RIGHT: 'top-right',
@@ -16,4 +16,4 @@ export const ALERT_POSITIONS = {
     BOTTOM_LEFT: 'bottom-left',
 } as const;
 
-export type AlertPosition = typeof ALERT_POSITIONS[keyof typeof ALERT_POSITIONS]; 
+export type TAlertPosition = typeof ALERT_POSITIONS[keyof typeof ALERT_POSITIONS]; 
