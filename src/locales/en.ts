@@ -20,5 +20,6 @@ export const en = {
     post: {
         unknownAuthor: 'Unknown Author',
         notFound: 'Post not found',
+        authorNameFormat: 'Author {id}',
     },
 } as const; 

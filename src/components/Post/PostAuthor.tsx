@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import Avatar from '@/components/UI/Avatar/Avatar';
 import { AVATAR_PLACEHOLDER } from '@/consts/placeholders';
+import { useTranslation } from '@/hooks/useTranslation';
 import type { TSizeKeys } from '@/types/sizes';
 
 interface IProps {

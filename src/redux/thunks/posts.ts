@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { en } from '@/locales/en';
 import type { TPost } from '@/types/posts';
 import type { PostsState } from '../types/posts';
 
@@ -14,7 +15,7 @@ export const fetchPosts = createAsyncThunk<
 >(
     'posts/fetchPosts',
     async (page: number, { getState }) => {
-        const state = getState() as { posts: PostsState };
+        const state = getState();
         const limit = state.posts.postsPerPage;
         const skip = page * limit;
 
@@ -25,7 +26,7 @@ export const fetchPosts = createAsyncThunk<
             ...post,
             author: {
                 id: post.userId,
-                name: `Author ${post.userId}`,
+                name: en.post.authorNameFormat.replace('{id}', post.userId.toString()),
                 image: `https://i.pravatar.cc/${post.userId}`,
             },
         }));
@@ -47,7 +48,7 @@ export const fetchPostById = createAsyncThunk<TPost, string>(
             ...post,
             author: {
                 id: post.userId,
-                name: `Author ${post.userId}`,
+                name: en.post.authorNameFormat.replace('{id}', post.userId.toString()),
                 image: `https://i.pravatar.cc/${post.userId}`,
             },
         };

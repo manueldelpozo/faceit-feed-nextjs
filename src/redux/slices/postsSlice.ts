@@ -27,6 +27,9 @@ const postsSlice = createSlice({
                 post.isNew = false;
             }
         },
+        resetPosts: () => {
+            return initialState;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -64,6 +67,6 @@ const postsSlice = createSlice({
     },
 });
 
-export const { addNewPost, markPostAsSeen } = postsSlice.actions;
+export const { addNewPost, markPostAsSeen, resetPosts } = postsSlice.actions;
 
 export default postsSlice.reducer;

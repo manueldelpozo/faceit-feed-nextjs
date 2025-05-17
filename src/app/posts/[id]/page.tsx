@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import BackButton from '@/components/Page/BackButton';
 import PostAuthor from '@/components/Post/PostAuthor';
@@ -11,6 +10,7 @@ import PostTitle from '@/components/Post/PostTitle';
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { useTranslation } from '@/hooks/useTranslation';
 import { selectPostById, selectLoading } from '@/redux/selectors/posts';
 import { fetchPostById } from '@/redux/thunks/posts';
 import { ALERT_VARIANTS } from '@/types/alert';
