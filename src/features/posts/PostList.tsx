@@ -1,10 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
-import { useAppDispatch } from '@/hooks/useAppDispatch';
 import useInfiniteScrolling from '@/hooks/useInfiniteScrolling';
 import { useTranslation } from '@/hooks/useTranslation';
-import { markPostAsSeen } from '@/redux/slices/postsSlice';
 import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/types/alert';
 import type { TPost } from '@/types/posts';
 import PostItem from './PostItem';
@@ -23,7 +21,6 @@ const PostList = ({
     onLoadMore,
 }: IProps) => {
     const { t } = useTranslation();
-    const dispatch = useAppDispatch();
     const loaderRef = useRef<HTMLDivElement | null>(null);
 
     useInfiniteScrolling(() => {
@@ -31,21 +28,6 @@ const PostList = ({
             onLoadMore?.();
         }
     }, loaderRef);
-
-    useEffect(() => {
-        const removeIsNew = (delay: number) => {
-            posts.forEach(post => {
-                if (post.isNew) {
-                    const timer = setTimeout(() => {
-                        dispatch(markPostAsSeen(post.id));
-                    }, delay);
-                    return () => clearTimeout(timer);
-                }
-            });
-        };
-
-        removeIsNew(5_000);
-    }, [posts, dispatch]);
 
     if (posts.length === 0 && !loading) {
         return (

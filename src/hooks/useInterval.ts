@@ -45,7 +45,7 @@ interface UseIntervalOptions {
  * );
  * ```
  */
-const useInterval = (
+export const useInterval = (
     callback: () => void | Promise<void>,
     delay: number | null,
     options: UseIntervalOptions = {
@@ -73,15 +73,12 @@ const useInterval = (
             }
         };
 
-        // Run immediately if specified
         if (options.immediate) {
             tick();
         }
 
-        // Set up the interval
         intervalId.current = setInterval(tick, delay);
 
-        // Cleanup function
         return () => {
             if (intervalId.current) {
                 clearInterval(intervalId.current);
@@ -90,5 +87,3 @@ const useInterval = (
         };
     }, [delay, options]);
 };
-
-export default useInterval; 
