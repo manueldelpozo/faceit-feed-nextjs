@@ -49,8 +49,8 @@ describe('getMockedNewPost', () => {
             expect(typeof post.id).toBe('number');
             expect(typeof post.userId).toBe('number');
             expect(typeof post.reactions).toBe('number');
-            expect(post.userId).toBeGreaterThanOrEqual(1);
-            expect(post.userId).toBeLessThanOrEqual(10);
+            expect(post.userId).toBeGreaterThanOrEqual(1000);
+            expect(post.userId).toBeLessThanOrEqual(9999);
         });
 
         it('should have valid string values', () => {
@@ -70,12 +70,12 @@ describe('getMockedNewPost', () => {
 
         it('should have correctly formatted author name', () => {
             const post = getMockedNewPost() as TPost & { author: NonNullable<TPost['author']> };
-            expect(post.author.name).toMatch(/^New Author [1-9]|10$/);
+            expect(post.author.name).toMatch(/^New Author [1-9][0-9]{3}$/);
         });
 
         it('should have correctly formatted image URL', () => {
             const post = getMockedNewPost() as TPost & { author: NonNullable<TPost['author']> };
-            expect(post.author.image).toMatch(/^https:\/\/i\.pravatar\.cc\/[1-9]|10$/);
+            expect(post.author.image).toMatch(/^https:\/\/i\.pravatar\.cc\/[1-9][0-9]{3}$/);
         });
     });
 
