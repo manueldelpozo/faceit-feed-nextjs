@@ -36,3 +36,20 @@ export const fetchPosts = createAsyncThunk<
         };
     }
 );
+
+export const fetchPostById = createAsyncThunk<TPost, string>(
+    'posts/fetchPostById',
+    async (id: string) => {
+        const response = await fetch(`https://dummyjson.com/posts/${id}`);
+        const post = await response.json();
+
+        return {
+            ...post,
+            author: {
+                id: post.userId,
+                name: `Author ${post.userId}`,
+                image: `https://i.pravatar.cc/${post.userId}`,
+            },
+        };
+    }
+);

@@ -45,6 +45,11 @@ export const selectSeenPosts = createSelector(
     (posts) => posts.filter((post: TPost) => !post.isNew)
 );
 
+export const selectPostById = (id: string) => createSelector(
+    selectPosts,
+    (posts) => posts.find(post => post.id === parseInt(id))
+);
+
 export const selectPostsByAuthor = (authorId: number) => createSelector(
     selectPosts,
     (posts) => posts.filter((post: TPost) => post.author?.id === authorId)
