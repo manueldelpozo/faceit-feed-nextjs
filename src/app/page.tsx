@@ -59,7 +59,7 @@ const FeedPage = () => {
 
       {shouldNotifyNewPost && (
         <Alert
-          message={t('feed.newPost')}
+          message={`${t('feed.newPost')}: ${posts[0].title}`}
           variant={ALERT_VARIANTS.SUCCESS}
           duration={INTERVALS.ALERT_DURATION}
           isFloating

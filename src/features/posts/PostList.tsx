@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef } from 'react';
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
@@ -22,6 +24,7 @@ const PostList = ({
 }: IProps) => {
     const { t } = useTranslation();
     const loaderRef = useRef<HTMLDivElement | null>(null);
+    const isEmpty = posts.length === 0 && !loading;
 
     useInfiniteScrolling(() => {
         if (!loading && hasMore) {
@@ -29,7 +32,7 @@ const PostList = ({
         }
     }, loaderRef);
 
-    if (posts.length === 0 && !loading) {
+    if (isEmpty) {
         return (
             <div className="text-center my-4">
                 <Alert
