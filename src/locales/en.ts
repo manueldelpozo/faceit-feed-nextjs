@@ -7,15 +7,16 @@ export const en = {
     },
     feed: {
         title: 'Feed',
-        noPosts: 'No posts available',
+        noPosts: 'No posts yet',
         loadingMore: 'Loading more posts...',
-        endOfFeed: "You've reached the end of the feed.",
+        endOfFeed: 'You have reached the end of the feed',
+        newPost: 'New post available!',
     },
     alert: {
         close: 'Close',
     },
     post: {
         unknownAuthor: 'Unknown Author',
-        notFound: 'Post not found. The post you\'re looking for doesn\'t exist or has been removed.',
+        notFound: 'Post not found',
     },
 } as const; 

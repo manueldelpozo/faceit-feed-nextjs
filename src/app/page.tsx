@@ -4,6 +4,7 @@ import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import PageTitle from '@/components/Page/PageTitle';
 import Alert from '@/components/UI/Alert/Alert';
+import { INTERVALS } from '@/consts/intervals';
 import PostList from '@/features/posts/PostList';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useNewPostSimulate } from '@/hooks/useNewPostSimulate';
@@ -27,19 +28,22 @@ const FeedPage = () => {
   const currentPage = useSelector(selectCurrentPage);
   const hasMore = useSelector(selectHasMore);
 
-  useNewPostSimulate();
+  const shouldLoadFirst = posts.length === 0 && !error;
+  const shouldLoadMore = !loading && hasMore;
+
+  const [shouldNotifyNewPost] = useNewPostSimulate();
 
   useEffect(() => {
-    if (posts.length === 0) {
+    if (shouldLoadFirst) {
       dispatch(fetchPosts(0));
     }
-  }, [dispatch, posts.length]);
+  }, [dispatch, shouldLoadFirst]);
 
   const loadMorePosts = useCallback(() => {
-    if (!loading && hasMore) {
+    if (shouldLoadMore) {
       dispatch(fetchPosts(currentPage));
     }
-  }, [loading, hasMore, currentPage, dispatch]);
+  }, [shouldLoadMore, currentPage, dispatch]);
 
   return (
     <div className="container mx-auto p-4">
@@ -47,7 +51,17 @@ const FeedPage = () => {
         <Alert
           message={error}
           variant={ALERT_VARIANTS.ERROR}
-          duration={5_000}
+          duration={INTERVALS.ALERT_DURATION}
+          isFloating
+        />
+      )}
+
+      {shouldNotifyNewPost && (
+        <Alert
+          message={t('feed.newPost')}
+          variant={ALERT_VARIANTS.SUCCESS}
+          duration={INTERVALS.ALERT_DURATION}
+          isFloating
         />
       )}
 

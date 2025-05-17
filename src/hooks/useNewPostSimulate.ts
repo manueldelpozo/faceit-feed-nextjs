@@ -1,5 +1,6 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { INTERVALS } from '@/consts/intervals';
 import { getMockedNewPost } from '@/helpers/getMockedNewPost';
 import { selectPosts } from '@/redux/selectors/posts';
 import { addNewPost, markPostAsSeen } from '@/redux/slices/postsSlice';
@@ -13,16 +14,18 @@ interface UseNewPostSimulateProps {
 }
 
 export const useNewPostSimulate = ({
-    interval = 15_000,
+    interval = INTERVALS.NEW_POST_SIMULATION,
     enabled = true,
-    markSeenDelay = 5_000,
+    markSeenDelay = INTERVALS.POST_MARK_SEEN
 }: UseNewPostSimulateProps = {}) => {
     const dispatch = useAppDispatch();
     const posts = useSelector(selectPosts);
+    const [shouldNotifyNewPost, setShouldNotifyNewPost] = useState(false);
 
     const simulateNewPost = useCallback(() => {
         const newPostMock = getMockedNewPost();
         dispatch(addNewPost(newPostMock));
+        setShouldNotifyNewPost(true);
     }, [dispatch]);
 
     useInterval(
@@ -38,6 +41,7 @@ export const useNewPostSimulate = ({
             posts.forEach(post => {
                 if (post.isNew) {
                     const timer = setTimeout(() => {
+                        setShouldNotifyNewPost(false);
                         dispatch(markPostAsSeen(post.id));
                     }, delay);
                     return () => clearTimeout(timer);
@@ -47,4 +51,6 @@ export const useNewPostSimulate = ({
 
         removeIsNew(markSeenDelay);
     }, [posts, dispatch, markSeenDelay]);
+
+    return [shouldNotifyNewPost];
 }; 

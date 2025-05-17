@@ -9,7 +9,8 @@
         "title": "Feed",
         "noPosts": "No posts available",
         "loadingMore": "Loading more posts...",
-        "endOfFeed": "You've reached the end of the feed."
+        "endOfFeed": "You've reached the end of the feed.",
+        "newPost": "New post available!"
     },
     "alert": {
         "close": "Close"

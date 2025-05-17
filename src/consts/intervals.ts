@@ -1,0 +1,5 @@
+export const INTERVALS = {
+    NEW_POST_SIMULATION: 8_000,
+    POST_MARK_SEEN: 5_000,
+    ALERT_DURATION: 5_000,
+} as const; 

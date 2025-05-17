@@ -2,7 +2,6 @@ import Link from 'next/link';
 import PostAuthor from '@/components/Post/PostAuthor';
 import PostBody from '@/components/Post/PostBody';
 import PostTitle from '@/components/Post/PostTitle';
-import { HIGHLIGHT_CLASSES } from '@/consts/styles';
 import { POST_BODY_MAX_LENGTH } from '@/consts/text';
 import type { TPost } from '@/types/posts';
 
@@ -11,7 +10,7 @@ interface IProps {
 }
 
 const PostItem = ({ post }: IProps) => {
-    const highlightClass = post.isNew ? HIGHLIGHT_CLASSES.NEW : HIGHLIGHT_CLASSES.NONE;
+    const highlightClass = post.isNew ? 'bg-green-900' : '';
 
     return (
         <Link href={`/posts/${post.id}`} passHref>
