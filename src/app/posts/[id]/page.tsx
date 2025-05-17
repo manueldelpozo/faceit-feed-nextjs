@@ -2,15 +2,15 @@
 
 import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { useSelector } from 'react-redux';
 import BackButton from '@/components/Page/BackButton';
 import PostAuthor from '@/components/Post/PostAuthor';
 import PostBody from '@/components/Post/PostBody';
 import PostTitle from '@/components/Post/PostTitle';
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
-import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
+import { useAppSelector } from '@/redux/hooks/useAppSelector';
 import { selectPostById, selectLoading } from '@/redux/selectors/posts';
 import { fetchPostById } from '@/redux/thunks/posts';
 import { ALERT_VARIANTS } from '@/types/alert';
@@ -20,8 +20,8 @@ const SinglePostPage = () => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation();
 
-    const post = useSelector(selectPostById(params.id));
-    const loading = useSelector(selectLoading);
+    const post = useAppSelector(selectPostById(params.id));
+    const loading = useAppSelector(selectLoading);
 
     const isFetching = loading && !post;
     const hasError = !loading && !post;
@@ -43,7 +43,6 @@ const SinglePostPage = () => {
                     <Loader size="lg" />
                 </div>
             )}
-
 
             {hasError && (
                 <div className="max-w-2xl mx-auto">

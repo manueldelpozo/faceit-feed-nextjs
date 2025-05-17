@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import PageTitle from '@/components/Page/PageTitle';
 import ScrollUpButton from '@/components/Page/ScrollUpButton';
 import Alert from '@/components/UI/Alert/Alert';
 import { INTERVALS } from '@/consts/intervals';
 import PostList from '@/features/posts/PostList';
-import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useNewPostSimulate } from '@/hooks/useNewPostSimulate';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
+import { useAppSelector } from '@/redux/hooks/useAppSelector';
 import {
   selectPosts,
   selectLoading,
@@ -24,11 +24,11 @@ import { ALERT_VARIANTS } from '@/types/alert';
 const FeedPage = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const posts = useSelector(selectPosts);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-  const currentPage = useSelector(selectCurrentPage);
-  const hasMore = useSelector(selectHasMore);
+  const posts = useAppSelector(selectPosts);
+  const loading = useAppSelector(selectLoading);
+  const error = useAppSelector(selectError);
+  const currentPage = useAppSelector(selectCurrentPage);
+  const hasMore = useAppSelector(selectHasMore);
 
   const shouldLoadFirst = posts.length <= 1 && !error;
   const shouldLoadMore = !loading && hasMore;
