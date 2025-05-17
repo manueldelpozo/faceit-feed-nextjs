@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { ARROW_UP_ICON } from '@/consts/svgIcons';
 import { useTranslation } from '@/hooks/useTranslation';

@@ -8,7 +8,7 @@ export const sizeStyles = {
     sm: 'h-4 w-4',
     md: 'h-6 w-6',
     lg: 'h-8 w-8'
-} as const satisfies Record<TSizeKeys, `h-${number} w-${number}`>;
+} satisfies Record<TSizeKeys, `h-${number} w-${number}`>;
 
 /**
  * Color variants for the Loader component.

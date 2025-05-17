@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import { BACK_ARROW_ICON } from '@/consts/svgIcons';
 import { useTranslation } from '@/hooks/useTranslation';
