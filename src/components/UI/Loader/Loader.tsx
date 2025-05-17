@@ -1,7 +1,8 @@
 import { sizeStyles, colorStyles } from '@/consts/loaderStyles';
+import { type TSizeKeys } from '@/types/sizes';
 
 interface IProps {
-    size?: keyof typeof sizeStyles;
+    size?: TSizeKeys;
     color?: keyof typeof colorStyles;
     content?: React.ReactNode;
     className?: string;
