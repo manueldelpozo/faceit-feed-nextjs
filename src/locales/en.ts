@@ -5,6 +5,7 @@ export const en = {
         error: 'An error occurred',
         back: 'Back',
         scrollToTop: 'Scroll to top',
+        fallbackError: 'Something went wrong. Please try again later.',
     },
     feed: {
         title: 'Feed',

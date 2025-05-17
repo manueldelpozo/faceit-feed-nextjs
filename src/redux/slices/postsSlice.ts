@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { en } from '@/locales/en';
 import type { TPost } from '@/types/posts';
-import { fetchPosts } from '../thunks/posts';
+import { fetchPostById, fetchPosts } from '../thunks/posts';
 import type { PostsState } from '../types/posts';
 
 const initialState: PostsState = {
@@ -41,7 +42,24 @@ const postsSlice = createSlice({
             })
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Failed to fetch posts';
+                state.error = action.error.message || en.common.fallbackError;
+            })
+            .addCase(fetchPostById.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchPostById.fulfilled, (state, action: PayloadAction<TPost>) => {
+                state.loading = false;
+                const existingPostIndex = state.posts.findIndex((post) => post.id === action.payload.id);
+                if (existingPostIndex >= 0) {
+                    state.posts[existingPostIndex] = action.payload;
+                } else {
+                    state.posts.push(action.payload);
+                }
+            })
+            .addCase(fetchPostById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || en.common.fallbackError;
             });
     },
 });
