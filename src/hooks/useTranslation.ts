@@ -1,12 +1,5 @@
 import enTranslations from '@/locales/en.json';
-
-type DotPrefix<T extends string> = T extends '' ? '' : `.${T}`;
-
-type DotNotation<T> = (
-    T extends object ?
-    { [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<DotNotation<T[K]>>}` }[Exclude<keyof T, symbol>]
-    : ''
-) extends infer D ? Extract<D, string> : never;
+import type { DotNotation } from '@/types/dotNotation';
 
 type TranslationKeys = DotNotation<typeof enTranslations>;
 type TranslationValue = string | { [key: string]: TranslationValue };

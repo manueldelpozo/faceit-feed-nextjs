@@ -12,5 +12,8 @@
     },
     "alert": {
         "close": "Close"
+    },
+    "post": {
+        "unknownAuthor": "Unknown Author"
     }
 }
