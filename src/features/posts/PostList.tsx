@@ -1,10 +1,10 @@
 import { useRef } from 'react';
+import Alert from '@/components/UI/Alert/Alert';
+import Loader from '@/components/UI/Loader/Loader';
 import useInfiniteScrolling from '@/hooks/useInfiniteScrolling';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/types/alert';
 import type { TPost } from '@/types/posts';
-import Alert from '../Alert/Alert';
-import Loader from '../Loader/Loader';
 
 interface IProps {
     posts: TPost[];

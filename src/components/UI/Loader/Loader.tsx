@@ -1,4 +1,4 @@
-import { sizeStyles, colorStyles } from '../../consts/loaderStyles';
+import { sizeStyles, colorStyles } from '@/consts/loaderStyles';
 
 interface IProps {
     size?: keyof typeof sizeStyles;
