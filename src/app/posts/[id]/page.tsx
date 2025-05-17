@@ -3,21 +3,21 @@
 import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import BackButton from '@/components/Page/BackButton';
 import PostAuthor from '@/components/Post/PostAuthor';
 import PostBody from '@/components/Post/PostBody';
 import PostTitle from '@/components/Post/PostTitle';
 import Alert from '@/components/UI/Alert/Alert';
-import BackButton from '@/components/UI/BackButton/BackButton';
 import Loader from '@/components/UI/Loader/Loader';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { selectPostById, selectLoading } from '@/redux/selectors/posts';
-import type { AppDispatch } from '@/redux/store';
 import { fetchPostById } from '@/redux/thunks/posts';
 import { ALERT_VARIANTS } from '@/types/alert';
 
 const SinglePostPage = () => {
     const params = useParams<{ id: string }>();
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const { t } = useTranslation();
 
     const post = useSelector(selectPostById(params.id));

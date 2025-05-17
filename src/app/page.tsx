@@ -1,11 +1,12 @@
 'use client';
 
 import { useEffect, useCallback, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PageTitle from '@/components/Page/PageTitle';
 import Alert from '@/components/UI/Alert/Alert';
 import PostList from '@/features/posts/PostList';
 import { getMockedNewPost } from '@/helpers/getMockedNewPost';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
 import useInterval from '@/hooks/useInterval';
 import { useTranslation } from '@/hooks/useTranslation';
 import {
@@ -16,14 +17,13 @@ import {
   selectCurrentPage,
   selectHasMore,
 } from '@/redux/selectors/posts';
-import { addNewPost, markPostAsSeen } from '@/redux/slices/postsSlice';
-import type { AppDispatch } from '@/redux/store';
+import { addNewPost } from '@/redux/slices/postsSlice';
 import { fetchPosts } from '@/redux/thunks/posts';
 import { ALERT_VARIANTS } from '@/types/alert';
 
 const FeedPage = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const posts = useSelector(selectPosts);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -66,21 +66,6 @@ const FeedPage = () => {
       }
     }
   );
-
-  useEffect(() => {
-    const removeIsNew = (delay: number) => {
-      posts.forEach(post => {
-        if (post.isNew) {
-          const timer = setTimeout(() => {
-            dispatch(markPostAsSeen(post.id));
-          }, delay);
-          return () => clearTimeout(timer);
-        }
-      });
-    };
-
-    removeIsNew(5_000);
-  }, [posts, dispatch]);
 
   return (
     <div className="container mx-auto p-4">
