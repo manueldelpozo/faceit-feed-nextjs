@@ -1,8 +1,9 @@
 {
     "common": {
         "loading": "Loading...",
-        "loadMore": "Load more",
-        "error": "Error"
+        "loadMore": "Load More",
+        "error": "An error occurred",
+        "back": "Back"
     },
     "feed": {
         "title": "Feed",
@@ -14,6 +15,7 @@
         "close": "Close"
     },
     "post": {
-        "unknownAuthor": "Unknown Author"
+        "unknownAuthor": "Unknown Author",
+        "notFound": "Post not found. The post you're looking for doesn't exist or has been removed."
     }
 }

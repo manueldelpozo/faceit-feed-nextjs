@@ -1,8 +1,9 @@
-export default {
+export const en = {
     common: {
         loading: 'Loading...',
-        loadMore: 'Load more',
-        error: 'Error',
+        loadMore: 'Load More',
+        error: 'An error occurred',
+        back: 'Back',
     },
     feed: {
         title: 'Feed',
@@ -15,5 +16,6 @@ export default {
     },
     post: {
         unknownAuthor: 'Unknown Author',
+        notFound: 'Post not found. The post you\'re looking for doesn\'t exist or has been removed.',
     },
 } as const; 
