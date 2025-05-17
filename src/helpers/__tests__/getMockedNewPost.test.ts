@@ -1,8 +1,12 @@
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, beforeEach } from '@jest/globals';
 import type { TPost } from '@/types/posts';
-import { getMockedNewPost } from '../getMockedNewPost';
+import { getMockedNewPost, resetCounter } from '../getMockedNewPost';
 
 describe('getMockedNewPost', () => {
+    beforeEach(() => {
+        resetCounter();
+    });
+
     describe('post structure', () => {
         it('should return a valid post object', () => {
             const post = getMockedNewPost();
@@ -49,8 +53,7 @@ describe('getMockedNewPost', () => {
             expect(typeof post.id).toBe('number');
             expect(typeof post.userId).toBe('number');
             expect(typeof post.reactions).toBe('number');
-            expect(post.userId).toBeGreaterThanOrEqual(1000);
-            expect(post.userId).toBeLessThanOrEqual(9999);
+            expect(post.id).toBeGreaterThanOrEqual(500);
         });
 
         it('should have valid string values', () => {
@@ -65,26 +68,40 @@ describe('getMockedNewPost', () => {
     describe('format validation', () => {
         it('should have correctly formatted title', () => {
             const post = getMockedNewPost();
-            expect(post.title).toMatch(/^New Post Title [a-f0-9]{8}$/);
+            expect(post.title).toMatch(/^New Post Title \d+$/);
         });
 
         it('should have correctly formatted author name', () => {
             const post = getMockedNewPost() as TPost & { author: NonNullable<TPost['author']> };
-            expect(post.author.name).toMatch(/^New Author [1-9][0-9]{3}$/);
+            expect(post.author.name).toMatch(/^New Author \d+$/);
         });
 
         it('should have correctly formatted image URL', () => {
             const post = getMockedNewPost() as TPost & { author: NonNullable<TPost['author']> };
-            expect(post.author.image).toMatch(/^https:\/\/i\.pravatar\.cc\/[1-9][0-9]{3}$/);
+            expect(post.author.image).toMatch(/^https:\/\/i\.pravatar\.cc\/\d+$/);
         });
     });
 
-    describe('uniqueness', () => {
-        it('should generate different posts on each call', () => {
+    describe('incremental IDs', () => {
+        it('should start from 500', () => {
+            const post = getMockedNewPost();
+            expect(post.id).toBe(500);
+        });
+
+        it('should increment IDs sequentially', () => {
             const post1 = getMockedNewPost();
             const post2 = getMockedNewPost();
-            expect(post1.id).not.toBe(post2.id);
-            expect(post1.title).not.toBe(post2.title);
+            const post3 = getMockedNewPost();
+            expect(post1.id).toBe(500);
+            expect(post2.id).toBe(501);
+            expect(post3.id).toBe(502);
+        });
+
+        it('should use same ID for all post properties', () => {
+            const post = getMockedNewPost() as TPost & { author: NonNullable<TPost['author']> };
+            expect(post.id).toBe(500);
+            expect(post.userId).toBe(500);
+            expect(post.author.id).toBe(500);
         });
     });
 }); 

@@ -1,43 +1,49 @@
-import { v4 as uuidv4 } from 'uuid';
+import { PRAVATAR_BASE_URL } from '@/consts/apiRoutes';
 import type { TPost } from "@/types/posts";
 
+const INITIAL_MOCKED_POST_ID = 500;
+
+let counter = INITIAL_MOCKED_POST_ID;
+
+export const resetCounter = () => {
+    counter = INITIAL_MOCKED_POST_ID;
+};
+
 /**
- * Generates a mock post with unique ID and deterministic user data
+ * Generates a mock post with incremental ID starting from 500
  * 
  * @returns {TPost} A new post object with the following properties:
- * - id: Numeric ID derived from UUID
- * - title: "New Post Title" followed by a short version of the UUID
- * - body: A descriptive text with the post's unique ID
- * - userId: Deterministic number between 1 and 1000 based on UUID
+ * - id: Incremental number starting from 500
+ * - title: "New Post Title" followed by the ID
+ * - body: A descriptive text with the post's ID
+ * - userId: Same as id
  * - tags: ['realtime', 'new']
  * - reactions: 0
  * - author: Object containing:
  *   - id: Same as userId
- *   - name: "New Author" followed by userId
+ *   - name: "New Author" followed by id
  *   - image: Avatar URL from pravatar.cc
  * 
  * @example
  * const newPost = getMockedNewPost();
- * // Returns a new post with UUID and deterministic user data
+ * // Returns a new post with incremental ID starting from 500
  */
 export const getMockedNewPost = (): TPost => {
-    const uuid = uuidv4();
-    const shortId = uuid.slice(0, 8); // Use first 8 characters for display
-    const numberId = 1000 + (parseInt(uuid.slice(0, 4), 16) % 9000); // Convert first 4 hex chars to number 1000-9999
+    const currentId = counter++;
 
-    return ({
-        id: numberId,
-        title: `New Post Title ${shortId}`,
-        body: `This is a new post with ID ${shortId}. ` +
+    return {
+        id: currentId,
+        title: `New Post Title ${currentId}`,
+        body: `This is a new post with ID ${currentId}. ` +
             `It should be prepended to the list and highlighted briefly. ` +
             `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-        userId: numberId,
+        userId: currentId,
         tags: ['realtime', 'new'],
         reactions: 0,
         author: {
-            id: numberId,
-            name: `New Author ${numberId}`,
-            image: `https://i.pravatar.cc/${numberId}`,
+            id: currentId,
+            name: `New Author ${currentId}`,
+            image: `${PRAVATAR_BASE_URL}/${currentId}`,
         },
-    });
+    };
 }
