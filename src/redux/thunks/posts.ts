@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { PRAVATAR_BASE_URL, DUMMYJSON_POSTS_URL } from '@/consts/apiRoutes';
 import { en } from '@/locales/en';
 import type { TPost } from '@/types/posts';
 import type { PostsState } from '../types/posts';
@@ -19,7 +20,7 @@ export const fetchPosts = createAsyncThunk<
         const limit = state.posts.postsPerPage;
         const skip = page * limit;
 
-        const postsResponse = await fetch(`https://dummyjson.com/posts?limit=${limit}&skip=${skip}`);
+        const postsResponse = await fetch(`${DUMMYJSON_POSTS_URL}?limit=${limit}&skip=${skip}`);
         const postsData = await postsResponse.json();
 
         const postsWithAuthors = postsData.posts.map((post: TPost) => ({
@@ -27,7 +28,7 @@ export const fetchPosts = createAsyncThunk<
             author: {
                 id: post.userId,
                 name: en.post.authorNameFormat.replace('{id}', post.userId.toString()),
-                image: `https://i.pravatar.cc/${post.userId}`,
+                image: `${PRAVATAR_BASE_URL}/${post.userId}`,
             },
         }));
 
@@ -41,7 +42,7 @@ export const fetchPosts = createAsyncThunk<
 export const fetchPostById = createAsyncThunk<TPost, string>(
     'posts/fetchPostById',
     async (id: string) => {
-        const response = await fetch(`https://dummyjson.com/posts/${id}`);
+        const response = await fetch(`${DUMMYJSON_POSTS_URL}/${id}`);
         const post = await response.json();
 
         return {
@@ -49,7 +50,7 @@ export const fetchPostById = createAsyncThunk<TPost, string>(
             author: {
                 id: post.userId,
                 name: en.post.authorNameFormat.replace('{id}', post.userId.toString()),
-                image: `https://i.pravatar.cc/${post.userId}`,
+                image: `${PRAVATAR_BASE_URL}/${post.userId}`,
             },
         };
     }

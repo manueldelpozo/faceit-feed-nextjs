@@ -32,52 +32,41 @@ const SinglePostPage = () => {
         }
     }, [dispatch, params.id, post]);
 
-    if (isFetching) {
-        return (
-            <div className="container mx-auto px-4 py-8">
-                <div className="mb-6">
-                    <BackButton />
-                </div>
-                <div className="max-w-2xl mx-auto flex justify-center items-center min-h-[400px]">
-                    <Loader size="lg" />
-                </div>
-            </div>
-        );
-    }
-
-    if (hasError) {
-        return (
-            <div className="container mx-auto px-4 py-8">
-                <div className="mb-6">
-                    <BackButton />
-                </div>
-                <div className="max-w-2xl mx-auto">
-                    <Alert
-                        message={t('post.notFound')}
-                        variant={ALERT_VARIANTS.ERROR}
-                        isFloating={false}
-                    />
-                </div>
-            </div>
-        );
-    }
-
-    if (!post) return null;
-
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="mb-6">
                 <BackButton />
             </div>
-            <article className="max-w-2xl mx-auto">
-                <PostTitle title={post.title} size="lg" className="mb-4" />
-                <PostAuthor
-                    name={post.author?.name}
-                    imageSrc={post.author?.image}
-                    className="mb-6"
-                />
-                <PostBody body={post.body} />
-            </article>
+
+            {isFetching && (
+                <div className="max-w-2xl mx-auto flex justify-center items-center min-h-[400px]">
+                    <Loader size="lg" />
+                </div>
+            )}
+
+
+            {hasError && (
+                <div className="max-w-2xl mx-auto">
+                    <Alert
+                        message={t('post.notFound')}
+                        variant={ALERT_VARIANTS.ERROR}
+                        isFloating={false}
+                        duration={0}
+                    />
+                </div>
+            )}
+
+            {!!post && (
+                <article className="max-w-2xl mx-auto">
+                    <PostTitle title={post.title} size="lg" className="mb-4" />
+                    <PostAuthor
+                        name={post.author?.name}
+                        imageSrc={post.author?.image}
+                        className="mb-6"
+                    />
+                    <PostBody body={post.body} />
+                </article>
+            )}
         </div>
     );
 };

@@ -8,7 +8,7 @@ interface IProps {
 
 const PageTitle = ({ title, children, className = '' }: PropsWithChildren<IProps>) => {
     return (
-        <div className="mb-4">
+        <div className="my-4">
             <h1 className={`text-2xl font-bold ${className}`}>
                 {title}
             </h1>
