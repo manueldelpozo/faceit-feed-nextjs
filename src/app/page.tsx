@@ -3,6 +3,7 @@
 import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import PageTitle from '@/components/Page/PageTitle';
+import ScrollUpButton from '@/components/Page/ScrollUpButton';
 import Alert from '@/components/UI/Alert/Alert';
 import { INTERVALS } from '@/consts/intervals';
 import PostList from '@/features/posts/PostList';
@@ -73,6 +74,8 @@ const FeedPage = () => {
         hasMore={hasMore}
         onLoadMore={loadMorePosts}
       />
+
+      <ScrollUpButton />
     </div>
   );
 };

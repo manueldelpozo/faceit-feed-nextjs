@@ -3,7 +3,8 @@
         "loading": "Loading...",
         "loadMore": "Load More",
         "error": "An error occurred",
-        "back": "Back"
+        "back": "Back",
+        "scrollToTop": "Scroll to top"
     },
     "feed": {
         "title": "Feed",

@@ -4,6 +4,7 @@ export const en = {
         loadMore: 'Load More',
         error: 'An error occurred',
         back: 'Back',
+        scrollToTop: 'Scroll to top',
     },
     feed: {
         title: 'Feed',

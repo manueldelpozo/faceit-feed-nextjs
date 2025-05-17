@@ -14,7 +14,7 @@ const PostItem = ({ post }: IProps) => {
 
     return (
         <Link href={`/posts/${post.id}`} passHref>
-            <div className={`border rounded-lg p-4 m-4 shadow-sm cursor-pointer transition-colors duration-500 ${highlightClass}`}>
+            <div className={`border rounded-lg p-4 m-4 hover:bg-amber-900 cursor-pointer transition-colors duration-500 ${highlightClass}`}>
                 <PostAuthor
                     name={post.author?.name}
                     imageSrc={post.author?.image}
