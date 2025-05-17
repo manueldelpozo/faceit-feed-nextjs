@@ -45,7 +45,7 @@ const PostList = ({
     return (
         <div className="space-y-4">
             {posts.map((post) => (
-                <PostItem key={post.id} post={post} />
+                <PostItem key={`${post.id}${post.userId}`} post={post} />
             ))}
 
             <div ref={loaderRef} className="flex justify-center my-4">
