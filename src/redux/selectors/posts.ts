@@ -8,6 +8,11 @@ export const selectPosts = createSelector(
     (postsState) => postsState.posts
 );
 
+export const selectNewestPost = createSelector(
+    selectPostsState,
+    (postsState) => postsState.posts.find(({ isNew }) => isNew)
+);
+
 export const selectLoading = createSelector(
     selectPostsState,
     (postsState) => postsState.loading

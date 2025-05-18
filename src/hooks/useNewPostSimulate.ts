@@ -3,8 +3,9 @@ import { INTERVALS } from '@/consts/intervals';
 import { getMockedNewPost } from '@/helpers/getMockedNewPost';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { useAppSelector } from '@/redux/hooks/useAppSelector';
-import { selectPosts } from '@/redux/selectors/posts';
+import { selectNewestPost } from '@/redux/selectors/posts';
 import { addNewPost, markPostAsSeen } from '@/redux/slices/postsSlice';
+import type { TPost } from '@/types/posts';
 import { useInterval } from './useInterval';
 
 interface UseNewPostSimulateProps {
@@ -17,13 +18,14 @@ export const useNewPostSimulate = ({
     interval = INTERVALS.NEW_POST_SIMULATION,
     enabled = true,
     markSeenDelay = INTERVALS.POST_MARK_SEEN
-}: UseNewPostSimulateProps = {}) => {
+}: UseNewPostSimulateProps = {}): TPost | null => {
     const dispatch = useAppDispatch();
-    const posts = useAppSelector(selectPosts);
+    const newestPost = useAppSelector(selectNewestPost);
     const [shouldNotifyNewPost, setShouldNotifyNewPost] = useState(false);
 
     const simulateNewPost = useCallback(() => {
         const newPostMock = getMockedNewPost();
+
         dispatch(addNewPost(newPostMock));
         setShouldNotifyNewPost(true);
     }, [dispatch]);
@@ -31,26 +33,27 @@ export const useNewPostSimulate = ({
     useInterval(
         simulateNewPost,
         interval,
-        {
-            enabled,
-        }
+        { enabled }
     );
 
     useEffect(() => {
+        if (!newestPost) return;
+
         const removeIsNew = (delay: number) => {
-            posts.forEach(post => {
-                if (post.isNew) {
-                    const timer = setTimeout(() => {
-                        setShouldNotifyNewPost(false);
-                        dispatch(markPostAsSeen(post.id));
-                    }, delay);
-                    return () => clearTimeout(timer);
-                }
-            });
+            if (newestPost.isNew) {
+                const timer = setTimeout(() => {
+                    setShouldNotifyNewPost(false);
+                    dispatch(markPostAsSeen(newestPost.id));
+                }, delay);
+
+                return () => clearTimeout(timer);
+            }
         };
 
         removeIsNew(markSeenDelay);
-    }, [posts, dispatch, markSeenDelay]);
+    }, [newestPost, dispatch, markSeenDelay]);
 
-    return [shouldNotifyNewPost];
+    if (!shouldNotifyNewPost || !newestPost?.isNew) return null;
+
+    return newestPost;
 }; 
