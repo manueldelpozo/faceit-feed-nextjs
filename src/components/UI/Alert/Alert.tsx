@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { positionStyles, variantStyles } from '@/consts/alertStyles';
@@ -8,6 +10,7 @@ interface IProps {
     message: string;
     variant?: TAlertVariant;
     duration?: number;
+    onClick?: () => void;
     onClose?: () => void;
     isFloating?: boolean;
     position?: TAlertPosition;
@@ -17,6 +20,7 @@ const Alert = ({
     message,
     variant = ALERT_VARIANTS.INFO,
     duration = 5_000,
+    onClick,
     onClose,
     isFloating = true,
     position = ALERT_POSITIONS.TOP_RIGHT,
@@ -38,9 +42,10 @@ const Alert = ({
 
     const alertContent = (
         <div
-            className={`p-4 rounded-lg border ${variantStyles[variant]} shadow-lg transition-opacity duration-300 ${isFloating ? `fixed z-50 ${positionStyles[position]}` : ''
+            className={`p-4 rounded-lg border ${variantStyles[variant]} shadow-lg cursor-pointer transition-opacity duration-300 ${isFloating ? `fixed z-50 ${positionStyles[position]}` : ''
                 }`}
             role="alert"
+            onClick={onClick}
         >
             <div className="flex items-center gap-2">
                 {variantIcons[variant]}

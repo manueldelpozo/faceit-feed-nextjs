@@ -19,6 +19,7 @@ import {
 } from '@/redux/selectors/posts';
 import { fetchPosts } from '@/redux/thunks/posts';
 import { ALERT_VARIANTS } from '@/types/alert';
+import { scrollToTop } from '@/utils/scrollToTop';
 
 const FeedPage = () => {
   const { t } = useTranslation();
@@ -62,6 +63,7 @@ const FeedPage = () => {
           message={`${t('feed.newPost')}: ${posts[0].title}`}
           variant={ALERT_VARIANTS.SUCCESS}
           duration={INTERVALS.ALERT_DURATION}
+          onClick={scrollToTop}
           isFloating
         />
       )}

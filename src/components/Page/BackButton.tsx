@@ -23,7 +23,7 @@ const BackButton = ({ className = '' }: BackButtonProps) => {
     return (
         <button
             onClick={goBack}
-            className={`flex items-center gap-2 text-gray-400 hover:text-gray-200 hover:cursor-pointer transition-colors duration-200 ${className}`}
+            className={`flex items-center gap-2 text-gray-400 hover:text-gray-200 cursor-pointer transition-colors duration-200 ${className}`}
             aria-label={t('common.back')}
         >
             {BACK_ARROW_ICON}
