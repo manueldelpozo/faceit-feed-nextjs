@@ -2,7 +2,6 @@
 
 import Alert from '@/components/UI/Alert/Alert';
 import { ALERT_VARIANTS } from '@/consts/alert';
-import { INTERVALS } from '@/consts/intervals';
 import { useNewPostSimulate } from '@/hooks/useNewPostSimulate';
 import { useTranslation } from '@/hooks/useTranslation';
 import { scrollToTop } from '@/utils/scrollToTop';
@@ -17,7 +16,6 @@ const NewPostNotification = () => {
         <Alert
             message={`${t('feed.newPost')}: ${newPost.title}`}
             variant={ALERT_VARIANTS.SUCCESS}
-            duration={INTERVALS.ALERT_DURATION}
             onClick={scrollToTop}
             isFloating
         />

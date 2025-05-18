@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { AlertIcon, CloseIcon } from '@/components/Icons';
 import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/consts/alert';
 import { positionStyles, variantStyles } from '@/consts/alertStyles';
+import { INTERVALS } from '@/consts/intervals';
 import { type TAlertPosition, type TAlertVariant } from '@/types/alert';
 
 interface IProps {
@@ -14,16 +15,18 @@ interface IProps {
     onClick?: () => void;
     onClose?: () => void;
     isFloating?: boolean;
+    showClose?: boolean;
     position?: TAlertPosition;
 }
 
 const Alert = ({
     message,
     variant = ALERT_VARIANTS.INFO,
-    duration = 5_000,
+    duration = INTERVALS.ALERT_DURATION,
     onClick,
     onClose,
     isFloating = true,
+    showClose = false,
     position = ALERT_POSITIONS.TOP_RIGHT,
 }: IProps) => {
     const [isVisible, setIsVisible] = useState(true);
@@ -39,24 +42,25 @@ const Alert = ({
         }
     }, [duration, onClose]);
 
+    const handleClose = () => {
+        setIsVisible(false);
+        onClose?.();
+    }
+
     if (!isVisible && duration > 0) return null;
 
     const alertContent = (
         <div
-            className={`p-4 rounded-lg border ${variantStyles[variant]} shadow-lg cursor-pointer transition-opacity duration-300 ${isFloating ? `fixed z-50 ${positionStyles[position]}` : ''
-                }`}
+            className={`p-4 rounded-lg border ${variantStyles[variant]} shadow-lg ${onClick ? 'cursor-pointer' : ''} transition-opacity duration-300 ${isFloating ? `fixed z-50 ${positionStyles[position]}` : ''}`}
             role="alert"
             onClick={onClick}
         >
             <div className="flex items-center gap-2">
                 <AlertIcon variant={variant} />
                 <p className="text-sm font-medium">{message}</p>
-                {onClose && (
+                {showClose && (
                     <button
-                        onClick={() => {
-                            setIsVisible(false);
-                            onClose();
-                        }}
+                        onClick={handleClose}
                         className="ml-auto text-gray-400 hover:text-gray-500 focus:outline-none"
                     >
                         <CloseIcon />

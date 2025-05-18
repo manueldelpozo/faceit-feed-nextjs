@@ -5,7 +5,6 @@ import PlaceholderItem, { createPlaceholders } from '@/components/Post/Placehold
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
 import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/consts/alert';
-import { INTERVALS } from '@/consts/intervals';
 import useInfiniteScrolling from '@/hooks/useInfiniteScrolling';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
@@ -24,8 +23,9 @@ const PostList = () => {
     const hasMore = useAppSelector(selectHasMore);
     const bottomListRef = useRef<HTMLDivElement | null>(null);
 
-    const isInitializing = posts.length === 0;
+    const isInitializing = posts.length === 0 && !error;
     const isEmpty = posts.length === 0 && !loading;
+    const isEnded = !hasMore && posts.length > 0;
     const canLoadMore = !loading && hasMore;
 
     useInfiniteScrolling(() => {
@@ -56,8 +56,8 @@ const PostList = () => {
                 <Alert
                     message={error}
                     variant={ALERT_VARIANTS.ERROR}
-                    duration={INTERVALS.ALERT_DURATION}
-                    isFloating
+                    duration={0}
+                    isFloating={false}
                 />
             </div>
         );
@@ -77,22 +77,22 @@ const PostList = () => {
                         content={t('feed.loadingMore')}
                     />
                 )}
-                {!hasMore && posts.length > 0 && (
-                    <Alert
-                        message={t('feed.endOfFeed')}
-                        variant={ALERT_VARIANTS.INFO}
-                        position={ALERT_POSITIONS.BOTTOM_CENTER}
-                    />
-                )}
-                {isEmpty && (
-                    <Alert
-                        variant={ALERT_VARIANTS.WARNING}
-                        message={t('feed.noPosts')}
-                        isFloating={false}
-                        duration={0}
-                    />
-                )}
             </div>
+
+            {isEnded && (
+                <Alert
+                    message={t('feed.endOfFeed')}
+                    position={ALERT_POSITIONS.BOTTOM_CENTER}
+                />
+            )}
+            {isEmpty && (
+                <Alert
+                    variant={ALERT_VARIANTS.WARNING}
+                    message={t('feed.noPosts')}
+                    isFloating={false}
+                    duration={0}
+                />
+            )}
         </div>
     );
 };

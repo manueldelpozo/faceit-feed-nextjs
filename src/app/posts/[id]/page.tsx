@@ -35,6 +35,24 @@ const SinglePostPage = () => {
         }
     }, [dispatch, params.id, post]);
 
+    if (error) {
+        return (
+            <div className="container mx-auto px-4 py-8">
+                <div className="mb-6">
+                    <BackButton />
+                </div>
+
+                <Alert
+                    message={t('post.notFound')}
+                    variant={ALERT_VARIANTS.ERROR}
+                    position="top-center"
+                    duration={0}
+                    isFloating={false}
+                />
+            </div>
+        );
+    }
+
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="mb-6">
@@ -48,17 +66,6 @@ const SinglePostPage = () => {
                         <Loader size="lg" />
                     </div>
                 </>
-            )}
-
-            {error && (
-                <div className="max-w-2xl mx-auto">
-                    <Alert
-                        message={t('post.notFound')}
-                        variant={ALERT_VARIANTS.ERROR}
-                        isFloating={false}
-                        duration={0}
-                    />
-                </div>
             )}
 
             {!!post && (
