@@ -8,7 +8,7 @@
         "fallbackError": "Something went wrong. Please try again later."
     },
     "feed": {
-        "title": "Feed",
+        "title": "FACEIT Feed",
         "noPosts": "No posts available",
         "loadingMore": "Loading more posts...",
         "endOfFeed": "You've reached the end of the feed.",

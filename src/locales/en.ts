@@ -8,7 +8,7 @@ export const en = {
         fallbackError: 'Something went wrong. Please try again later.',
     },
     feed: {
-        title: 'Feed',
+        title: 'FACEIT Feed',
         noPosts: 'No posts yet',
         loadingMore: 'Loading more posts...',
         endOfFeed: 'You have reached the end of the feed',
