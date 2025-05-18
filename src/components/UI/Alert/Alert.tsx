@@ -7,9 +7,9 @@ import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/consts/alert';
 import { positionStyles, variantStyles } from '@/consts/alertStyles';
 import { INTERVALS } from '@/consts/intervals';
 import { type TAlertPosition, type TAlertVariant } from '@/types/alert';
-import type { TOptionalClassName } from '@/types/utility';
+import type { PropsWithClassName } from '@/types/utility';
 
-interface IProps extends TOptionalClassName {
+interface IProps extends PropsWithClassName {
     message: string;
     variant?: TAlertVariant;
     duration?: number;

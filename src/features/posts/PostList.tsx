@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import PlaceholderItem, { createPlaceholders } from '@/components/Post/PlaceholderItem';
+import PlaceholderItem from '@/components/Post/PlaceholderItem';
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
 import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/consts/alert';
@@ -11,6 +11,7 @@ import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { useAppSelector } from '@/redux/hooks/useAppSelector';
 import { selectCurrentPage, selectError, selectHasMore, selectLoading, selectPosts } from '@/redux/selectors/posts';
 import { fetchPosts } from '@/redux/thunks/posts';
+import { createPlaceholders } from '@/utils/placeholder';
 import PostItem from './PostItem';
 
 const PostList = () => {

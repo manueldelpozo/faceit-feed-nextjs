@@ -5,9 +5,9 @@ import { BackArrowIcon } from '@/components/Icons';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { visitPost } from '@/redux/slices/postsSlice';
-import type { TOptionalClassName } from '@/types/utility';
+import type { PropsWithClassName } from '@/types/utility';
 
-const BackButton = ({ className = '' }: TOptionalClassName) => {
+const BackButton = ({ className = '' }: PropsWithClassName) => {
     const router = useRouter();
     const { t } = useTranslation();
     const dispatch = useAppDispatch();

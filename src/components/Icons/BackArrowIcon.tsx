@@ -1,6 +1,6 @@
-import type { TOptionalClassName } from '@/types/utility';
+import type { PropsWithClassName } from '@/types/utility';
 
-export const BackArrowIcon = ({ className = "w-5 h-5" }: TOptionalClassName) => (
+export const BackArrowIcon = ({ className = "w-5 h-5" }: PropsWithClassName) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

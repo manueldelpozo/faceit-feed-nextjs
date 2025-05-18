@@ -1,7 +1,7 @@
 import { truncateText } from '@/helpers/text';
-import type { TOptionalClassName } from '@/types/utility';
+import type { PropsWithClassName } from '@/types/utility';
 
-interface IProps extends TOptionalClassName {
+interface IProps extends PropsWithClassName {
     body: string;
     maxLength?: number;
 }

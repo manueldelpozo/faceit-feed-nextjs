@@ -1,9 +1,9 @@
 import { PLACEHOLDER_VARIANTS } from '@/consts/placeholder';
 import { TPlaceholderVariant } from '@/types/placeholder';
-import type { TOptionalClassName } from '@/types/utility';
-import { createPlaceholders, getPlaceholderClasses } from '@/utils/placeholder';
+import type { PropsWithClassName } from '@/types/utility';
+import { getPlaceholderClasses } from '@/utils/placeholder';
 
-interface IProps extends TOptionalClassName {
+interface IProps extends PropsWithClassName {
     variant?: TPlaceholderVariant;
 }
 
@@ -36,5 +36,4 @@ const PlaceholderItem = ({ variant = PLACEHOLDER_VARIANTS.LIST, className = '' }
     );
 };
 
-export { createPlaceholders };
 export default PlaceholderItem;

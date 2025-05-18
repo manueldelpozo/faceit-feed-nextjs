@@ -1,9 +1,9 @@
 import { sizeStyles, colorStyles } from '@/consts/loaderStyles';
-import type { TSizeKeys } from '@/types/sizes';
-import type { TOptionalClassName } from '@/types/utility';
+import type { TSizeKeysStandard } from '@/types/sizes';
+import type { PropsWithClassName } from '@/types/utility';
 
-interface IProps extends TOptionalClassName {
-    size?: TSizeKeys;
+interface IProps extends PropsWithClassName {
+    size?: TSizeKeysStandard;
     color?: keyof typeof colorStyles;
     content?: React.ReactNode;
 }

@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
-import type { TOptionalClassName } from '@/types/utility';
+import type { PropsWithClassName } from '@/types/utility';
 
-interface IProps extends TOptionalClassName {
+interface IProps extends PropsWithClassName {
     title: string;
 }
 
