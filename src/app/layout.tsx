@@ -11,9 +11,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen flex flex-col">
         <Provider store={store}>
-          {children}
+          <main className="flex-grow">
+            {children}
+          </main>
         </Provider>
       </body>
     </html>

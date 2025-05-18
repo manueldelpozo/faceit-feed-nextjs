@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
+import Footer from '@/components/Page/Footer';
+import Header from '@/components/Page/Header';
 import PageTitle from '@/components/Page/PageTitle';
 import ScrollUpButton from '@/components/Page/ScrollUpButton';
 import NewPostNotification from '@/features/posts/NewPostNotification';
@@ -18,15 +20,18 @@ const FeedPage = () => {
   }, [dispatch]);
 
   return (
-    <div className="container mx-auto p-4">
+    <>
       <NewPostNotification />
-
-      <PageTitle title={t('feed.title')} />
-
-      <PostList />
-
-      <ScrollUpButton />
-    </div>
+      <Header>
+        <PageTitle title={t('feed.title')} />
+      </Header>
+      <section className="container mx-auto p-4">
+        <PostList />
+      </section>
+      <Footer>
+        <ScrollUpButton />
+      </Footer>
+    </>
   );
 };
 
