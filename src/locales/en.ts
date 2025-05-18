@@ -22,4 +22,7 @@ export const en = {
         notFound: 'Post not found',
         authorNameFormat: 'Author {id}',
     },
+    footer: {
+        copyright: 'Manuel del Pozo | Senior Frontend Engineer',
+    },
 } as const; 
