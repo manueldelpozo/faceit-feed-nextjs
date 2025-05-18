@@ -1,4 +1,4 @@
-import { type TSizeKeys } from '@/types/sizes';
+import type { TSizeClasses } from '@/types/sizes';
 
 /**
  * Size variants for the Loader component.
@@ -8,7 +8,7 @@ export const sizeStyles = {
     sm: 'h-4 w-4',
     md: 'h-6 w-6',
     lg: 'h-8 w-8'
-} satisfies Record<TSizeKeys, `h-${number} w-${number}`>;
+} satisfies TSizeClasses;
 
 /**
  * Color variants for the Loader component.

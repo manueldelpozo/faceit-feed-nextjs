@@ -1,5 +1,12 @@
 import { SIZE_VALUES } from '@/consts/sizes';
-import { UnionTypeOfLiterals } from '@/types/utility';
+import { UnionTypeOfLiterals, GetSizeClasses } from '@/types/utility';
 
-export type TSizeKeys = keyof typeof SIZE_VALUES;
-export type TSizeValues = UnionTypeOfLiterals<typeof SIZE_VALUES>; 
+export type TSizeObject = typeof SIZE_VALUES;
+export type TSizeKeys = keyof TSizeObject;
+export type TSizeKeysStandard = Exclude<TSizeKeys, 'xl' | 'xs'>;
+export type TSizeValues = UnionTypeOfLiterals<TSizeObject>;
+
+export type TSizeClass = `h-${number} w-${number}`;
+export type TFontClass = `text-${string} font-${string}`;
+
+export type TSizeClasses = GetSizeClasses<TSizeKeys, TSizeClass>;

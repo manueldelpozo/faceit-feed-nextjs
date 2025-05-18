@@ -1,5 +1,7 @@
 export const SIZE_VALUES = {
-    sm: 32,
-    md: 40,
+    xs: 16,
+    sm: 24,
+    md: 32,
     lg: 48,
-} as const; 
+    xl: 64,
+} as const;
