@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { INITIAL_POSTS_PER_PAGE } from '@/consts/pagination';
 import { en } from '@/locales/en';
 import type { TPost } from '@/types/posts';
 import { fetchPostById, fetchPosts } from '../thunks/posts';
@@ -10,7 +11,7 @@ const initialState: TPostsState = {
     loading: false,
     error: null,
     currentPage: 0,
-    postsPerPage: 20,
+    postsPerPage: INITIAL_POSTS_PER_PAGE,
     hasMore: true,
 };
 

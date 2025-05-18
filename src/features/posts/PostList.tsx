@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import PlaceholderItem, { createPlaceholders } from '@/components/Post/PlaceholderItem';
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
 import useInfiniteScrolling from '@/hooks/useInfiniteScrolling';
@@ -24,6 +25,7 @@ const PostList = ({
 }: IProps) => {
     const { t } = useTranslation();
     const loaderRef = useRef<HTMLDivElement | null>(null);
+    const isInitializing = posts.length === 0;
     const isEmpty = posts.length === 0 && !loading;
 
     useInfiniteScrolling(() => {
@@ -32,15 +34,12 @@ const PostList = ({
         }
     }, loaderRef);
 
-    if (isEmpty) {
+    if (isInitializing) {
         return (
-            <div className="text-center my-4">
-                <Alert
-                    variant={ALERT_VARIANTS.WARNING}
-                    message={t('feed.noPosts')}
-                    isFloating={false}
-                    duration={0}
-                />
+            <div className="space-y-4 max-w-3xl mx-auto">
+                {createPlaceholders().map((placeholderId) => (
+                    <PlaceholderItem key={placeholderId} />
+                ))}
             </div>
         );
     }
@@ -64,6 +63,14 @@ const PostList = ({
                         message={t('feed.endOfFeed')}
                         variant={ALERT_VARIANTS.INFO}
                         position={ALERT_POSITIONS.BOTTOM_CENTER}
+                    />
+                )}
+                {isEmpty && (
+                    <Alert
+                        variant={ALERT_VARIANTS.WARNING}
+                        message={t('feed.noPosts')}
+                        isFloating={false}
+                        duration={0}
                     />
                 )}
             </div>

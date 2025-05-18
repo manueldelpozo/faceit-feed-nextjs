@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import BackButton from '@/components/Page/BackButton';
+import PlaceholderItem from '@/components/Post/PlaceholderItem';
 import PostAuthor from '@/components/Post/PostAuthor';
 import PostBody from '@/components/Post/PostBody';
 import PostTitle from '@/components/Post/PostTitle';
@@ -11,7 +12,7 @@ import Loader from '@/components/UI/Loader/Loader';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { useAppSelector } from '@/redux/hooks/useAppSelector';
-import { selectPostById, selectLoading, selectVisitedPost } from '@/redux/selectors/posts';
+import { selectPostById, selectLoading, selectVisitedPost, selectError } from '@/redux/selectors/posts';
 import { fetchPostById } from '@/redux/thunks/posts';
 import { ALERT_VARIANTS } from '@/types/alert';
 
@@ -23,10 +24,10 @@ const SinglePostPage = () => {
     const postById = useAppSelector(selectPostById(params.id));
     const visitedPost = useAppSelector(selectVisitedPost);
     const loading = useAppSelector(selectLoading);
+    const error = useAppSelector(selectError);
 
     const post = postById || visitedPost;
-    const isFetching = loading && !post;
-    const hasError = !loading && !post;
+    const isInitializing = loading || !post;
 
     useEffect(() => {
         if (params.id && !post) {
@@ -40,13 +41,16 @@ const SinglePostPage = () => {
                 <BackButton />
             </div>
 
-            {isFetching && (
-                <div className="max-w-2xl mx-auto flex justify-center items-center min-h-[400px]">
-                    <Loader size="lg" />
-                </div>
+            {isInitializing && (
+                <>
+                    <PlaceholderItem variant="detail" />
+                    <div className="max-w-2xl mx-auto flex justify-center items-center min-h-[400px]">
+                        <Loader size="lg" />
+                    </div>
+                </>
             )}
 
-            {hasError && (
+            {error && (
                 <div className="max-w-2xl mx-auto">
                     <Alert
                         message={t('post.notFound')}
