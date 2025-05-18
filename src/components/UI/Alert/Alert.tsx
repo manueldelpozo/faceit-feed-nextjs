@@ -7,8 +7,9 @@ import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/consts/alert';
 import { positionStyles, variantStyles } from '@/consts/alertStyles';
 import { INTERVALS } from '@/consts/intervals';
 import { type TAlertPosition, type TAlertVariant } from '@/types/alert';
+import type { TOptionalClassName } from '@/types/utility';
 
-interface IProps {
+interface IProps extends TOptionalClassName {
     message: string;
     variant?: TAlertVariant;
     duration?: number;
@@ -28,6 +29,7 @@ const Alert = ({
     isFloating = true,
     showClose = false,
     position = ALERT_POSITIONS.TOP_RIGHT,
+    className = '',
 }: IProps) => {
     const [isVisible, setIsVisible] = useState(true);
 
@@ -51,7 +53,7 @@ const Alert = ({
 
     const alertContent = (
         <div
-            className={`p-4 rounded-lg border ${variantStyles[variant]} shadow-lg ${onClick ? 'cursor-pointer' : ''} transition-opacity duration-300 ${isFloating ? `fixed z-50 ${positionStyles[position]}` : ''}`}
+            className={`p-4 rounded-lg border ${variantStyles[variant]} shadow-lg ${onClick ? 'cursor-pointer' : ''} transition-opacity duration-300 ${isFloating ? `fixed z-50 ${positionStyles[position]}` : ''} ${className}`}
             role="alert"
             onClick={onClick}
         >

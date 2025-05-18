@@ -7,7 +7,7 @@ interface IProps extends TOptionalClassName {
 
 const PageTitle = ({ title, children, className = '' }: PropsWithChildren<IProps>) => {
     return (
-        <div className={`sticky top-0 left-0 py-4 w-full z-10 bg-[var(--background)] ${className}`}>
+        <div className={className}>
             <h1 className="text-2xl text-center font-bold">
                 {title}
             </h1>

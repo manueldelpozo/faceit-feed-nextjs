@@ -63,10 +63,27 @@ const PostList = () => {
         );
     }
 
+    if (isEmpty) {
+        return (
+            <div className="space-y-4 max-w-3xl mx-auto">
+                <Alert
+                    variant={ALERT_VARIANTS.WARNING}
+                    message={t('feed.noPosts')}
+                    isFloating={false}
+                    duration={0}
+                />
+            </div>
+        );
+    }
+
     return (
-        <div className="space-y-4 max-w-3xl mx-auto">
+        <div className="space-y-4 max-w-3xl mx-auto post-list">
             {posts.map((post) => (
-                <PostItem key={`${post.id}_${post.userId}`} post={post} />
+                <PostItem
+                    key={`${post.id}_${post.userId}`}
+                    post={post}
+                    className="post-item scroll-animate"
+                />
             ))}
 
             <div ref={bottomListRef} className="flex justify-center my-4">
@@ -77,22 +94,13 @@ const PostList = () => {
                         content={t('feed.loadingMore')}
                     />
                 )}
+                {isEnded && (
+                    <Alert
+                        message={t('feed.endOfFeed')}
+                        position={ALERT_POSITIONS.BOTTOM_CENTER}
+                    />
+                )}
             </div>
-
-            {isEnded && (
-                <Alert
-                    message={t('feed.endOfFeed')}
-                    position={ALERT_POSITIONS.BOTTOM_CENTER}
-                />
-            )}
-            {isEmpty && (
-                <Alert
-                    variant={ALERT_VARIANTS.WARNING}
-                    message={t('feed.noPosts')}
-                    isFloating={false}
-                    duration={0}
-                />
-            )}
         </div>
     );
 };
