@@ -77,7 +77,7 @@ const PostList = () => {
     }
 
     return (
-        <div className="space-y-4 max-w-3xl mx-auto post-list">
+        <div className="space-y-4 max-w-3xl mx-auto mb-64 post-list">
             {posts.map((post) => (
                 <PostItem
                     key={`${post.id}_${post.userId}`}
