@@ -28,7 +28,7 @@ const ScrollUpButton = () => {
     return (
         <button
             onClick={scrollToTop}
-            className="fixed bottom-4 right-4 p-2 bg-primary text-white border-2 border-primary rounded-full shadow-lg hover:bg-primary-dark cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+            className="fixed bottom-4 right-4 z-50 p-2 bg-primary text-white border-2 border-primary rounded-full shadow-lg hover:bg-primary-dark cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
             aria-label={t('common.scrollToTop')}
         >
             <ArrowUpIcon />

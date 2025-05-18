@@ -27,10 +27,9 @@ const FeedPage = () => {
       </Header>
       <section className="container mx-auto p-4">
         <PostList />
-      </section>
-      <Footer>
         <ScrollUpButton />
-      </Footer>
+      </section>
+      <Footer />
     </>
   );
 };
