@@ -27,13 +27,14 @@ const SinglePostPage = () => {
     const error = useAppSelector(selectError);
 
     const post = postById || visitedPost;
-    const isInitializing = loading || !post;
+    const hasAlreadyPost = !!post;
+    const isInitializing = loading || !hasAlreadyPost;
 
     useEffect(() => {
-        if (params.id && !post) {
+        if (params.id && !hasAlreadyPost) {
             dispatch(fetchPostById(params.id));
         }
-    }, [dispatch, params.id, post]);
+    }, [dispatch, params.id, hasAlreadyPost]);
 
     if (error) {
         return (
@@ -68,7 +69,7 @@ const SinglePostPage = () => {
                 </>
             )}
 
-            {!!post && (
+            {hasAlreadyPost && (
                 <article className="max-w-2xl mx-auto">
                     <PostTitle title={post.title} size="lg" className="mb-4" />
                     <PostAuthor

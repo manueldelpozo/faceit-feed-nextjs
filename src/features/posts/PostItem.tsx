@@ -6,9 +6,9 @@ import { POST_BODY_MAX_LENGTH } from '@/consts/text';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { visitPost } from '@/redux/slices/postsSlice';
 import type { TPost } from '@/types/posts';
-import type { TOptionalClassName } from '@/types/utility';
+import type { PropsWithClassName } from '@/types/utility';
 
-interface IProps extends TOptionalClassName {
+interface IProps extends PropsWithClassName {
     post: TPost;
 }
 
