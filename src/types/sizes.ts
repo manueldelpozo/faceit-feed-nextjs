@@ -1,7 +1,5 @@
-export const SIZE_VALUES = {
-    sm: 32,
-    md: 40,
-    lg: 48,
-} as const;
+import { SIZE_VALUES } from '@/consts/sizes';
+import { UnionTypeOfLiterals } from '@/types/utility';
 
-export type TSizeKeys = keyof typeof SIZE_VALUES; 
+export type TSizeKeys = keyof typeof SIZE_VALUES;
+export type TSizeValues = UnionTypeOfLiterals<typeof SIZE_VALUES>; 

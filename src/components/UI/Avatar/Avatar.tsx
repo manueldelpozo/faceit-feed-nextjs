@@ -1,5 +1,6 @@
 import Image, { type ImageProps } from 'next/image';
-import { SIZE_VALUES, type TSizeKeys } from '@/types/sizes';
+import { SIZE_VALUES } from '@/consts/sizes';
+import type { TSizeKeys } from '@/types/sizes';
 
 const generateSizeClasses = (factor: number, sizes: typeof SIZE_VALUES) =>
     Object.entries(sizes).reduce((acc, [key, value]) => ({

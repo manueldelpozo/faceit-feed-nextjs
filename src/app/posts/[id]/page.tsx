@@ -9,12 +9,12 @@ import PostBody from '@/components/Post/PostBody';
 import PostTitle from '@/components/Post/PostTitle';
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
+import { ALERT_VARIANTS } from '@/consts/alert';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { useAppSelector } from '@/redux/hooks/useAppSelector';
 import { selectPostById, selectLoading, selectVisitedPost, selectError } from '@/redux/selectors/posts';
 import { fetchPostById } from '@/redux/thunks/posts';
-import { ALERT_VARIANTS } from '@/types/alert';
 
 const SinglePostPage = () => {
     const params = useParams<{ id: string }>();

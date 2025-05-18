@@ -1,4 +1,4 @@
-import { ALERT_VARIANTS } from '@/types/alert';
+import { ALERT_VARIANTS } from './alert';
 
 export const BACK_ARROW_ICON = (
     <svg

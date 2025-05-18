@@ -4,9 +4,9 @@ import { useRef } from 'react';
 import PlaceholderItem, { createPlaceholders } from '@/components/Post/PlaceholderItem';
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
+import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/consts/alert';
 import useInfiniteScrolling from '@/hooks/useInfiniteScrolling';
 import { useTranslation } from '@/hooks/useTranslation';
-import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/types/alert';
 import type { TPost } from '@/types/posts';
 import PostItem from './PostItem';
 

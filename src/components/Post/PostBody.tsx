@@ -1,9 +1,9 @@
 import { truncateText } from '@/helpers/text';
+import type { TOptionalClassName } from '@/types/utility';
 
-interface IProps {
+interface IProps extends TOptionalClassName {
     body: string;
     maxLength?: number;
-    className?: string;
 }
 
 const PostBody = ({ body, maxLength = 0, className = '' }: IProps) => (

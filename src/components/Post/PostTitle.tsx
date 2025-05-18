@@ -1,9 +1,9 @@
-import { type TSizeKeys } from '@/types/sizes';
+import type { TSizeKeys } from '@/types/sizes';
+import type { TOptionalClassName } from '@/types/utility';
 
-interface IProps {
+interface IProps extends TOptionalClassName {
     title: string;
     size?: TSizeKeys;
-    className?: string;
 }
 
 const sizeStyles = {

@@ -1,4 +1,5 @@
-import { PLACEHOLDER_VARIANTS, TPlaceholderVariant } from '@/types/placeholder';
+import { PLACEHOLDER_VARIANTS } from '@/consts/placeholder';
+import { TPlaceholderVariant } from '@/types/placeholder';
 import { createPlaceholders, getPlaceholderClasses } from '@/utils/placeholder';
 
 interface IProps {

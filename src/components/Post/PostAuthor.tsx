@@ -4,12 +4,12 @@ import Avatar from '@/components/UI/Avatar/Avatar';
 import { AVATAR_PLACEHOLDER } from '@/consts/placeholders';
 import { useTranslation } from '@/hooks/useTranslation';
 import type { TSizeKeys } from '@/types/sizes';
+import type { TOptionalClassName } from '@/types/utility';
 
-interface IProps {
+interface IProps extends TOptionalClassName {
     name?: string;
     imageSrc?: string;
     size?: TSizeKeys;
-    className?: string;
 }
 
 const PostAuthor = ({ name, imageSrc, size = 'md', className = '' }: IProps) => {

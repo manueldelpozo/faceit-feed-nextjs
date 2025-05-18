@@ -4,6 +4,7 @@ import { useEffect, useCallback } from 'react';
 import PageTitle from '@/components/Page/PageTitle';
 import ScrollUpButton from '@/components/Page/ScrollUpButton';
 import Alert from '@/components/UI/Alert/Alert';
+import { ALERT_VARIANTS } from '@/consts/alert';
 import { INTERVALS } from '@/consts/intervals';
 import PostList from '@/features/posts/PostList';
 import { useNewPostSimulate } from '@/hooks/useNewPostSimulate';
@@ -18,7 +19,6 @@ import {
   selectHasMore,
 } from '@/redux/selectors/posts';
 import { fetchPosts } from '@/redux/thunks/posts';
-import { ALERT_VARIANTS } from '@/types/alert';
 import { scrollToTop } from '@/utils/scrollToTop';
 
 const FeedPage = () => {

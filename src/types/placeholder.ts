@@ -1,6 +1,4 @@
-export const PLACEHOLDER_VARIANTS = {
-    LIST: 'list',
-    DETAIL: 'detail',
-} as const;
+import { PLACEHOLDER_VARIANTS } from '@/consts/placeholder';
+import { UnionTypeOfLiterals } from '@/types/utility';
 
-export type TPlaceholderVariant = typeof PLACEHOLDER_VARIANTS[keyof typeof PLACEHOLDER_VARIANTS]; 
+export type TPlaceholderVariant = UnionTypeOfLiterals<typeof PLACEHOLDER_VARIANTS>; 

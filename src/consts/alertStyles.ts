@@ -1,4 +1,4 @@
-import { ALERT_VARIANTS, ALERT_POSITIONS } from '@/types/alert';
+import { ALERT_VARIANTS, ALERT_POSITIONS } from './alert';
 
 export const variantStyles = {
     [ALERT_VARIANTS.ERROR]: 'bg-red-50 text-red-800 border-red-200',

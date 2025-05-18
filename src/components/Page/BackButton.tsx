@@ -1,16 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { BACK_ARROW_ICON } from '@/consts/svgIcons';
+import { BackArrowIcon } from '@/components/Icons';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { visitPost } from '@/redux/slices/postsSlice';
+import type { TOptionalClassName } from '@/types/utility';
 
-interface BackButtonProps {
-    className?: string;
-}
-
-const BackButton = ({ className = '' }: BackButtonProps) => {
+const BackButton = ({ className = '' }: TOptionalClassName) => {
     const router = useRouter();
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
@@ -26,7 +23,7 @@ const BackButton = ({ className = '' }: BackButtonProps) => {
             className={`flex items-center gap-2 text-gray-400 hover:text-gray-200 cursor-pointer transition-colors duration-200 ${className}`}
             aria-label={t('common.back')}
         >
-            {BACK_ARROW_ICON}
+            <BackArrowIcon />
             <span>{t('common.back')}</span>
         </button>
     );

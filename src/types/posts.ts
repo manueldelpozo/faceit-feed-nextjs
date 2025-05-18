@@ -1,3 +1,9 @@
+export type TAuthor = {
+    id: number;
+    name: string;
+    image: string;
+};
+
 export interface TPost {
     id: number;
     title: string;
@@ -5,10 +11,6 @@ export interface TPost {
     userId: number;
     tags: string[];
     reactions: number;
-    author?: {
-        id: number;
-        name: string;
-        image: string;
-    };
+    author?: TAuthor;
     isNew?: boolean;
 };

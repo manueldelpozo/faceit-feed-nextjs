@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { AlertIcon, CloseIcon } from '@/components/Icons';
+import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/consts/alert';
 import { positionStyles, variantStyles } from '@/consts/alertStyles';
-import { CLOSE_ICON, variantIcons } from '@/consts/svgIcons';
-import { ALERT_POSITIONS, ALERT_VARIANTS, type TAlertPosition, type TAlertVariant } from '@/types/alert';
+import { type TAlertPosition, type TAlertVariant } from '@/types/alert';
 
 interface IProps {
     message: string;
@@ -48,7 +49,7 @@ const Alert = ({
             onClick={onClick}
         >
             <div className="flex items-center gap-2">
-                {variantIcons[variant]}
+                <AlertIcon variant={variant} />
                 <p className="text-sm font-medium">{message}</p>
                 {onClose && (
                     <button
@@ -58,7 +59,7 @@ const Alert = ({
                         }}
                         className="ml-auto text-gray-400 hover:text-gray-500 focus:outline-none"
                     >
-                        {CLOSE_ICON}
+                        <CloseIcon />
                     </button>
                 )}
             </div>

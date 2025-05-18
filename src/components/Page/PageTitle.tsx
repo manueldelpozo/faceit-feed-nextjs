@@ -1,9 +1,8 @@
-import type { PropsWithChildren, ReactNode } from 'react';
+import type { PropsWithChildren } from 'react';
+import type { TOptionalClassName } from '@/types/utility';
 
-interface IProps {
+interface IProps extends TOptionalClassName {
     title: string;
-    children?: ReactNode;
-    className?: string;
 }
 
 const PageTitle = ({ title, children, className = '' }: PropsWithChildren<IProps>) => {
