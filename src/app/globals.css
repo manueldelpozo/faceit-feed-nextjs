@@ -3,6 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Animation ranges */
+  --animation-entry: 10%;
+  --animation-cover: 30%;
 }
 
 @theme inline {
@@ -28,12 +32,10 @@ body {
 /* Scroll-driven animations */
 @keyframes scale-up {
   from {
-    /* opacity: 0; */
     transform: scale(0.8) translateY(20px);
   }
 
   to {
-    /* opacity: 1; */
     transform: scale(1) translateY(0);
   }
 }
@@ -41,41 +43,41 @@ body {
 .scroll-animate {
   animation: scale-up linear both;
   animation-timeline: scroll();
-  animation-range: entry 10% cover 30%;
+  animation-range: entry var(--animation-entry) cover var(--animation-cover);
 }
 
-/* Apply to specific elements */
 .post-item {
   view-timeline-name: --post;
   view-timeline-axis: block;
   animation: scale-up linear both;
   animation-timeline: --post;
-  animation-range: entry 10% cover 30%;
+  animation-range: entry var(--animation-entry) cover var(--animation-cover);
 }
 
-/* Stagger children animations */
-.post-list>* {
-  animation: scale-up linear both;
-  animation-timeline: scroll();
-  animation-range: entry 10% cover 30%;
-}
+.post-list {
+  &>* {
+    animation: scale-up linear both;
+    animation-timeline: scroll();
+    animation-range: entry var(--animation-entry) cover var(--animation-cover);
 
-.post-list>*:nth-child(1) {
-  animation-delay: 0.1s;
-}
+    &:nth-child(1) {
+      animation-delay: 0.1s;
+    }
 
-.post-list>*:nth-child(2) {
-  animation-delay: 0.2s;
-}
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
 
-.post-list>*:nth-child(3) {
-  animation-delay: 0.3s;
-}
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
 
-.post-list>*:nth-child(4) {
-  animation-delay: 0.4s;
-}
+    &:nth-child(4) {
+      animation-delay: 0.4s;
+    }
 
-.post-list>*:nth-child(5) {
-  animation-delay: 0.5s;
+    &:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+  }
 }
