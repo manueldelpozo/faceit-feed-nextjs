@@ -19,9 +19,7 @@ const nextConfig = {
         webpackBuildWorker: true,
     },
     webpack: (config, { dev }) => {
-        if (dev) {
-            config.devtool = 'eval-source-map';
-        } else {
+        if (!dev) {
             config.optimization = {
                 ...config.optimization,
                 moduleIds: 'deterministic',
