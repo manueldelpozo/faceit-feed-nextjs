@@ -5,9 +5,15 @@ export const store = configureStore({
     reducer: {
         posts: postsReducer,
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['posts/fetchPosts/fulfilled'],
+                ignoredActionPaths: ['payload.timestamp'],
+                ignoredPaths: ['posts.items.timestamp'],
+            },
+        }),
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, ...}
 export type AppDispatch = typeof store.dispatch;

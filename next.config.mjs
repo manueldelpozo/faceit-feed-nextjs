@@ -9,6 +9,40 @@ const nextConfig = {
     experimental: {
         optimizeCss: true,
         optimizePackageImports: ['@reduxjs/toolkit', 'react-redux'],
+        webpackBuildWorker: true,
+        turbotrace: {
+            logLevel: 'error',
+            logDetail: true,
+        },
+    },
+    webpack: (config, { dev }) => {
+        if (!dev) {
+            config.optimization = {
+                ...config.optimization,
+                moduleIds: 'deterministic',
+                splitChunks: {
+                    chunks: 'all',
+                    minSize: 20000,
+                    maxSize: 244000,
+                    minChunks: 1,
+                    maxAsyncRequests: 30,
+                    maxInitialRequests: 30,
+                    cacheGroups: {
+                        defaultVendors: {
+                            test: /[\\/]node_modules[\\/]/,
+                            priority: -10,
+                            reuseExistingChunk: true,
+                        },
+                        default: {
+                            minChunks: 2,
+                            priority: -20,
+                            reuseExistingChunk: true,
+                        },
+                    },
+                },
+            };
+        }
+        return config;
     },
 };
 

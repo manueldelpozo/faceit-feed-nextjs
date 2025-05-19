@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import dynamic from 'next/dynamic';
 import PlaceholderItem from '@/components/Post/PlaceholderItem';
 import Alert from '@/components/UI/Alert/Alert';
 import Loader from '@/components/UI/Loader/Loader';
@@ -11,8 +12,11 @@ import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { useAppSelector } from '@/redux/hooks/useAppSelector';
 import { selectCurrentPage, selectError, selectHasMore, selectLoading, selectPosts } from '@/redux/selectors/posts';
 import { fetchPosts } from '@/redux/thunks/posts';
-import { createPlaceholders } from '@/utils/placeholder';
-import PostItem from './PostItem';
+
+const PostItem = dynamic(() => import('./PostItem'), {
+    loading: () => <PlaceholderItem />,
+    ssr: true
+});
 
 const PostList = () => {
     const { t } = useTranslation();
@@ -24,8 +28,7 @@ const PostList = () => {
     const hasMore = useAppSelector(selectHasMore);
     const bottomListRef = useRef<HTMLDivElement | null>(null);
 
-    const isInitializing = posts.length === 0 && !error;
-    const isEmpty = posts.length === 0 && !loading;
+    const isEmpty = posts.length === 0 && !loading && !hasMore;
     const isEnded = !hasMore && posts.length > 0;
     const canLoadMore = !loading && hasMore;
 
@@ -40,16 +43,6 @@ const PostList = () => {
             loadMorePosts();
         }
     }, bottomListRef);
-
-    if (isInitializing) {
-        return (
-            <div className="space-y-4 max-w-3xl mx-auto">
-                {createPlaceholders().map((placeholderId) => (
-                    <PlaceholderItem key={placeholderId} />
-                ))}
-            </div>
-        );
-    }
 
     if (error) {
         return (
