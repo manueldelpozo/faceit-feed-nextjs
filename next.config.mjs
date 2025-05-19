@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['i.pravatar.cc'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'i.pravatar.cc',
+                port: '',
+                pathname: '/**',
+            },
+        ],
         deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
         imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
         formats: ['image/webp'],
@@ -10,10 +17,6 @@ const nextConfig = {
         optimizeCss: true,
         optimizePackageImports: ['@reduxjs/toolkit', 'react-redux'],
         webpackBuildWorker: true,
-        turbotrace: {
-            logLevel: 'error',
-            logDetail: true,
-        },
     },
     webpack: (config, { dev }) => {
         if (!dev) {
