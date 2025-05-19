@@ -14,6 +14,24 @@ interface UseNewPostSimulateProps {
     markSeenDelay?: number;
 }
 
+/**
+ * A custom hook that simulates the creation of new posts at specified intervals.
+ * It manages the post lifecycle including creation, notification state, and marking posts as seen.
+ * 
+ * @param {Object} props - Configuration options for the hook
+ * @param {number} [props.interval=INTERVALS.NEW_POST_SIMULATION] - Time interval in milliseconds between new post simulations
+ * @param {boolean} [props.enabled=true] - Whether the post simulation is active
+ * @param {number} [props.markSeenDelay=INTERVALS.POST_MARK_SEEN] - Delay in milliseconds before marking a post as seen
+ * 
+ * @returns {TPost | null} The newest post if it should be notified, null otherwise
+ * 
+ * @example
+ * const newPost = useNewPostSimulate({
+ *   interval: 5000,
+ *   enabled: true,
+ *   markSeenDelay: 3000
+ * });
+ */
 export const useNewPostSimulate = ({
     interval = INTERVALS.NEW_POST_SIMULATION,
     enabled = true,
