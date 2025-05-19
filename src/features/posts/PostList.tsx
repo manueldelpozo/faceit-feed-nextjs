@@ -8,6 +8,7 @@ import Loader from '@/components/UI/Loader/Loader';
 import { ALERT_POSITIONS, ALERT_VARIANTS } from '@/consts/alert';
 import useInfiniteScrolling from '@/hooks/useInfiniteScrolling';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useVisibilityChange } from '@/hooks/useVisibilityChange';
 import { useAppDispatch } from '@/redux/hooks/useAppDispatch';
 import { useAppSelector } from '@/redux/hooks/useAppSelector';
 import { selectCurrentPage, selectError, selectHasMore, selectLoading, selectPosts } from '@/redux/selectors/posts';
@@ -32,17 +33,23 @@ const PostList = () => {
     const isEnded = !hasMore && posts.length > 0;
     const canLoadMore = !loading && hasMore;
 
-    useInfiniteScrolling(() => {
-        const loadMorePosts = () => {
-            if (canLoadMore) {
-                dispatch(fetchPosts(currentPage));
+    const loadMorePosts = async () => {
+        if (canLoadMore) {
+            try {
+                await dispatch(fetchPosts(currentPage));
+            } catch (error) {
+                console.error('Error loading more posts:', error);
             }
-        };
-
-        if (!loading && hasMore) {
-            loadMorePosts();
         }
-    }, bottomListRef);
+    };
+
+    useVisibilityChange(loadMorePosts, canLoadMore);
+
+    useInfiniteScrolling(
+        loadMorePosts,
+        bottomListRef,
+        { threshold: 0.5 }
+    );
 
     if (error) {
         return (
